@@ -2,7 +2,7 @@
 #define PLANET_H
 
 #include <QObject>
-#include <QPoint>
+#include <QtGui>
 class Planet : public QObject
 {
     Q_OBJECT
@@ -20,9 +20,9 @@ public:
 signals:
 
 public slots:
-    void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount);
+    void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount,int PlanetSize);
     void MirrorPlanet(Planet SomePlanet,int Quadrant);
-    bool CheckPlanetToPlanetCollision(Planet planet1, Planet planet2);
+    bool CheckPlanetToPlanetCollision(Planet planet2);
 
 };
 

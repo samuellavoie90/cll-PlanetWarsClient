@@ -11,8 +11,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        clientmaingame.cpp
+        clientmaingame.cpp \
+    ship.cpp \
+    planet.cpp
 
-HEADERS  += clientmaingame.h
+HEADERS  += clientmaingame.h \
+    ship.h \
+    planet.h
 
 FORMS    += clientmaingame.ui

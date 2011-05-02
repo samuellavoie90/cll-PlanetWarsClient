@@ -8,7 +8,7 @@ class Planet : public QObject
     Q_OBJECT
 public:
     explicit Planet(QObject *parent = 0);
-    QPoint Location;
+    QRect Location;
     int Population;
     int Player;
     int PopulationGrowth;
@@ -20,9 +20,11 @@ public:
 signals:
 
 public slots:
-    void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount,int PlanetSize);
+    void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount);
     void MirrorPlanet(Planet SomePlanet,int Quadrant);
     bool CheckPlanetToPlanetCollision(Planet planet2);
+    void DrawPlanet(); //to be completed later
+    void PlanetTick(int tickAmmount);
 
 };
 

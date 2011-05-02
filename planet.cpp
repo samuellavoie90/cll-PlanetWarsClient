@@ -21,8 +21,8 @@ QPoint temp;
 int tempsize;
 if(Quadrant!=1)
 {
-    int sizex = 512;
-    int sizey = 384;
+    sizex = 256;
+    sizey = 192;
 }
 do
 {
@@ -41,41 +41,57 @@ do
     }
 
 }while(Collision);
+Population= PopulationGrowth;
+Focus = false;
 
 }
 void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant)
 {
     int placex = 1024;
     int placey = 768;
-    int team = 2;
+    int team=2;
     if(Quadrant!=1)
     {
-        if(Quadrant=2)
+        if(Quadrant==2)
         {
-            int placex = 512;
-            int placey = 384;
-            team=2;
+            placex = 1024;
+            placey = SomePlanet.Location.y()*2;
+             team=2;
+
         }
-        if(Quadrant=3)
+        else
+        if(Quadrant==3)
         {
-            int placex = 512;
-            int placey = 384;
-            team=3;
+            placex = SomePlanet.Location.x()*2;
+            placey = 768;
+             team=3;
+
         }
-        if(Quadrant=4)
+        else
+        if(Quadrant==4)
         {
-            int placex = 512;
-            int placey = 384;
-            team = 4;
+            placex = 1024;
+            placey = 768;
+             team=4;
+
         }
+    }
+    if(SomePlanet.Player == 5)
+    {
+        team=5;
     }
     Location = QRect(QPoint(placex-SomePlanet.Location.x(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
     SomePlanet.Player=team;
     SomePlanet.PopulationGrowth = PopulationGrowth;
     SomePlanet.Population = Population;
+    Focus = false;
 
 }
 bool Planet::CheckPlanetToPlanetCollision(Planet planet2)
 {
   return Location.intersects(planet2.Location);
+}
+void Planet::PlanetTick(int tickAmmount)
+{
+
 }

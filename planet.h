@@ -19,6 +19,8 @@ public:
 signals:
 
 public slots:
+    void initialize(int Player, int Quadrant, Planet *PlanetArray,int PlanetCount);
+    void MirrorPlanet(Planet SomePlanet,int Quadrant);
 
 };
 

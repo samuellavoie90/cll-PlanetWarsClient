@@ -3,6 +3,7 @@
 Ship::Ship(QObject *parent) :
     QObject(parent)
 {
+    shipLaunched = false;
     /*
     bool shipLaunched;
     int TickstoLauch;
@@ -13,8 +14,23 @@ Ship::Ship(QObject *parent) :
     QRect Location
     */
 }
-void Ship::ShipTick()
+void Ship::ShipTick(int TickCount)
 {
+    if(shipLaunched)
+    {
+        double PercentX;
+
+
+    }
+    else
+    {
+        TickstoLauch-=TickCount;
+        if(TickstoLauch == 0)
+        {
+            shipLaunched = true;
+        }
+    }
+
 
 }
 
@@ -22,13 +38,12 @@ void Ship::ShipDraw()
 {
 
 }
-bool Ship::CheckShipToPlanetCollision(Planet SomePlanet)
+/*bool Ship::CheckShipToPlanetCollision(Planet SomePlanet)
 {
     return Location.intersects(SomePlanet.Location);
 
-}
+}*/
 bool Ship::CheckShipToShipCollision(Ship ship1, Ship ship2)
 {
     return ship1.Location.intersects(ship2.Location);
-
 }

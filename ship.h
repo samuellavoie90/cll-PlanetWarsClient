@@ -3,12 +3,12 @@
 
 #include <QObject>
 #include <QtGui>
-#include "planet.h"
+//#include "planet.h"
 class Ship : public QObject
 {
     Q_OBJECT
 public:
-    Ship(QObject *parent = 0);
+    explicit Ship(QObject *parent = 0);
     bool shipLaunched;
     int TickstoLauch;
     QPoint StartLocation;
@@ -16,9 +16,9 @@ public:
     int Attackvalue;
     int shipspeed;
     QRect Location;
-    void ShipTick();
+    void ShipTick(int TickCount);
     void ShipDraw();
-    bool CheckShipToPlanetCollision(Planet SomePlanet);
+//    bool CheckShipToPlanetCollision(Planet SomePlanet);
     static bool CheckShipToShipCollision(Ship ship1, Ship ship2);
 //une variable de texture
 signals:

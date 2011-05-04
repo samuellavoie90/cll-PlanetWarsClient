@@ -4,13 +4,15 @@
 #include <QObject>
 #include <QtGui>
 #include "ship.h"
-class Planet : public QObject
+
+class Planet
 {
-    Q_OBJECT
+    //Q_OBJECT
 public:
-    explicit Planet(QObject *parent = 0);
+    explicit Planet();
     QRect Location;
     int Population;
+    int PlanetNumber;
     int Player;
     int PopulationGrowth;
     bool Focus;
@@ -20,7 +22,7 @@ public:
 
     Ship CreateShip(Planet Destination);
     void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount);
-    void MirrorPlanet(Planet SomePlanet,int Quadrant);
+    void MirrorPlanet(Planet SomePlanet,int Quadrant,int PlanetCount);
     bool CheckPlanetToPlanetCollision(Planet planet2);
     void DrawPlanet(); //to be completed later
     void PlanetTick(int tickAmmount);

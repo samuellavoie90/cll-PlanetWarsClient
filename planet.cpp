@@ -95,3 +95,7 @@ void Planet::PlanetTick(int tickAmmount)
 {
 
 }
+Planet::Ship CreateShip(Planet Destination)
+{
+
+}

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtGui>
+#include "ship.h"
 class Planet : public QObject
 {
     Q_OBJECT
@@ -17,14 +18,16 @@ public:
     //une variable de texture
    //int planettype;
 
-signals:
-
-public slots:
+    Ship CreateShip(Planet Destination);
     void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount);
     void MirrorPlanet(Planet SomePlanet,int Quadrant);
     bool CheckPlanetToPlanetCollision(Planet planet2);
     void DrawPlanet(); //to be completed later
     void PlanetTick(int tickAmmount);
+signals:
+
+public slots:
+
 
 };
 

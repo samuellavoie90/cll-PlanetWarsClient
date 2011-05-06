@@ -26,6 +26,7 @@ public:
     bool CheckPlanetToPlanetCollision(Planet planet2);
     void DrawPlanet(); //to be completed later
     void PlanetTick(int tickAmmount);
+    bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet);
 signals:
 
 public slots:
@@ -34,3 +35,4 @@ public slots:
 };
 
 #endif // PLANET_H
+

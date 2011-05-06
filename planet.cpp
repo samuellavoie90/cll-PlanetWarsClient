@@ -97,7 +97,12 @@ void Planet::PlanetTick(int tickAmmount)
 {
 
 }
-Ship CreateShip(Planet Destination)
+Ship Planet::CreateShip(Planet Destination)
 {
 
+}
+
+bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet)
+{
+return SomeShip.Location.intersects(SomePlanet.Location);
 }

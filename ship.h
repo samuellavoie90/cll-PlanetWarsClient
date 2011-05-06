@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QtGui>
-//#include "planet.h"
 class Ship : public QObject
 {
     Q_OBJECT
@@ -18,7 +17,7 @@ public:
     QRect Location;
     void ShipTick(int TickCount);
     void ShipDraw();
-//    bool CheckShipToPlanetCollision(Planet SomePlanet);
+//
     static bool CheckShipToShipCollision(Ship ship1, Ship ship2);
 //une variable de texture
 signals:

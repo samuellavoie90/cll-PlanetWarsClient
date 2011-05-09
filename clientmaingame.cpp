@@ -6,6 +6,8 @@ ClientMainGame::ClientMainGame(QWidget *parent) :
     ui(new Ui::ClientMainGame)
 {
     ui->setupUi(this);
+
+    // TEST GUILLAUME
 }
 
 ClientMainGame::~ClientMainGame()

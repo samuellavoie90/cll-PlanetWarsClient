@@ -18,5 +18,6 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
     Q_UNUSED(e);
     myQP->begin(this);
 
+
     myQP->end();
 }

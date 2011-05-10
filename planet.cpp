@@ -46,7 +46,7 @@ do
     PlanetNumber=i;
 
 }while(Collision);
-Population= PopulationGrowth;
+Population= PopulationGrowth;//A checker pour des erreur en debug plustard
 Focus = false;
 
 }

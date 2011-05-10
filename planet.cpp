@@ -7,9 +7,11 @@ Planet::Planet()
     //int Player;
    // int PopulationGrowth;
    // bool Focus;
+    TickTillLastPop=100;
 }
 void Planet::initialize(int Owner, int Quadrant, Planet PlanetArray[], int PlanetCount)
 {
+    TickTillLastPop=100;
     int i =0;
 Player=Owner;
 bool Collision = false;
@@ -43,7 +45,8 @@ do
 {
     Collision = false;
     temp = QPoint(qrand()%sizex,qrand()%sizey);
-    tempsize = 15+qrand()%50;
+    PopulationGrowth = 15+qrand()%50;
+    tempsize = PopulationGrowth;
     Location=QRect(temp,QSize(tempsize,tempsize));
 
     while(i<PlanetCount)
@@ -59,11 +62,12 @@ do
 
 }while(Collision);
 Population= PopulationGrowth;//A checker pour des erreur en debug plustard
-Focus = false;
+PFocus = false;
 
 }
 void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
 {
+    TickTillLastPop=100;
     int placex = 1024;
     int placey = 768;
     Player=2;
@@ -126,7 +130,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     PopulationGrowth=PopulationGrowth;
     Population =SomePlanet.Population;
     PlanetNumber = SomePlanet.PlanetNumber+PlanetCount;
-    Focus = false;
+    PFocus = false;
 
 }
 bool Planet::CheckPlanetToPlanetCollision(Planet planet2)
@@ -135,7 +139,12 @@ bool Planet::CheckPlanetToPlanetCollision(Planet planet2)
 }
 void Planet::PlanetTick(int tickAmmount)
 {
-
+    TickTillLastPop-=tickAmmount;
+    if(TickTillLastPop <= PopulationGrowth)
+    {
+    Population += 1;
+    TickTillLastPop = 100;
+    }
 }
 Ship Planet::CreateShip(Planet Destination)
 {
@@ -179,7 +188,7 @@ return Someship;
 }
 void Planet::DrawPlanet(QPainter *QP)
 {
-
+QP->drawImage(Location,PlanetImg);
 
 }
 

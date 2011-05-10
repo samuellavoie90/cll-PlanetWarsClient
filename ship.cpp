@@ -24,7 +24,7 @@ void Ship::ShipTick(int TickCount)
     else
     {
         TickstoLauch-=TickCount;
-        if(TickstoLauch == 0)
+        if(TickstoLauch <= 0)
         {
             shipLaunched = true;
         }
@@ -35,7 +35,7 @@ void Ship::ShipTick(int TickCount)
 
 void Ship::DrawShip(QPainter *QP)
 {
-
+    QP->drawImage(Location,ShipImg);
 }
 /*bool Ship::CheckShipToPlanetCollision(Planet SomePlanet)
 {

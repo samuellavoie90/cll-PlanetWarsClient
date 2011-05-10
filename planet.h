@@ -15,7 +15,8 @@ public:
     int PlanetNumber;
     int Player;
     int PopulationGrowth;
-    bool Focus;
+    bool PFocus;
+    int TickTillLastPop;
     QImage PlanetImg;
     //populationGrowth va etre utiliser pour determiner la grandeur de la planete.
     //une variable de texture

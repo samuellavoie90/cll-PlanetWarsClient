@@ -31,3 +31,7 @@ QRect MagicRect::GetRectangle()
     }
     return temp;
 }
+  void Draw(QPainter *QP)
+  {
+
+  }

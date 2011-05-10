@@ -47,3 +47,8 @@ bool Ship::CheckShipToShipCollision(Ship ship1, Ship ship2)
 {
     return ship1.Location.intersects(ship2.Location);
 }
+
+void Ship::DrawShip(QPainter *QP)
+{
+
+}

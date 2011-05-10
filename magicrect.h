@@ -10,7 +10,7 @@ public:
     QPoint BotRight;
     QRect Rectangle1;
     QRect GetRectangle();
-    void Draw();
+    void Draw(QPainter *QP);
 
 };
 

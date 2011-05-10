@@ -19,9 +19,12 @@ public:
     ~ClientMainGame();
     QList<Planet> Planets;
     QList<Ship> Ships;
+protected:
+    void paintEvent(QPaintEvent *);
 
 private:
     Ui::ClientMainGame *ui;
+    QPainter *myQP;
 };
 
 #endif // CLIENTMAINGAME_H

@@ -16,7 +16,8 @@ public:
     int shipspeed;
     QRect Location;
     void ShipTick(int TickCount);
-    void ShipDraw();
+    void DrawShip(QPainter *);
+    QImage ShipImg;
 //
     static bool CheckShipToShipCollision(Ship ship1, Ship ship2);
 //une variable de texture

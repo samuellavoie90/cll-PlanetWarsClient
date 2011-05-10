@@ -23,6 +23,10 @@ if(Quadrant!=1)
     sizex = 256;
     sizey = 192;
 }
+else
+{
+
+}
 do    
 {
     Collision = false;
@@ -101,8 +105,13 @@ Ship Planet::CreateShip(Planet Destination)
 {
 
 }
+void Planet::DrawPlanet(QPainter *QP)
+{
 
-bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet)
+
+}
+
+bool Ship::CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet)
 {
 return SomeShip.Location.intersects(SomePlanet.Location);
 }

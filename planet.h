@@ -16,6 +16,7 @@ public:
     int Player;
     int PopulationGrowth;
     bool Focus;
+    QImage PlanetImg;
     //populationGrowth va etre utiliser pour determiner la grandeur de la planete.
     //une variable de texture
    //int planettype;
@@ -24,7 +25,7 @@ public:
     void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount);
     void MirrorPlanet(Planet SomePlanet,int Quadrant,int PlanetCount);
     bool CheckPlanetToPlanetCollision(Planet planet2);
-    void DrawPlanet(); //to be completed later
+    void DrawPlanet(QPainter *);
     void PlanetTick(int tickAmmount);
     bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet);
 signals:

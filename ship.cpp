@@ -1,7 +1,6 @@
 #include "ship.h"
 
-Ship::Ship(QObject *parent) :
-    QObject(parent)
+Ship::Ship(QObject *parent)
 {
     shipLaunched = false;
     /*
@@ -34,7 +33,7 @@ void Ship::ShipTick(int TickCount)
 
 }
 
-void Ship::ShipDraw()
+void Ship::DrawShip(QPainter *QP)
 {
 
 }
@@ -48,7 +47,3 @@ bool Ship::CheckShipToShipCollision(Ship ship1, Ship ship2)
     return ship1.Location.intersects(ship2.Location);
 }
 
-void Ship::DrawShip(QPainter *QP)
-{
-
-}

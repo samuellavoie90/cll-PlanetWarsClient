@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <QtGui>
-class Ship : public QObject
+class Ship
 {
-    Q_OBJECT
+
 public:
     explicit Ship(QObject *parent = 0);
     bool shipLaunched;

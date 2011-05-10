@@ -27,7 +27,7 @@ public:
     bool CheckPlanetToPlanetCollision(Planet planet2);
     void DrawPlanet(QPainter *);
     void PlanetTick(int tickAmmount);
-    bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet);
+   bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet);
 signals:
 
 public slots:

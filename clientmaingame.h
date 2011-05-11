@@ -5,7 +5,7 @@
 //ConnectToHost
 #include "ship.h"
 #include "planet.h"
-
+#include "magicrect.h"
 namespace Ui {
     class ClientMainGame;
 }
@@ -19,12 +19,14 @@ public:
     ~ClientMainGame();
     QList<Planet> Planets;
     QList<Ship> Ships;
+    MagicRect MRE;
 protected:
     void paintEvent(QPaintEvent *);
 
 private:
     Ui::ClientMainGame *ui;
     QPainter *myQP;
+
 };
 
 #endif // CLIENTMAINGAME_H

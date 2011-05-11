@@ -9,6 +9,7 @@ Paquet::Paquet(short Message, short Player, int Data[30])
         m_Data[i] = Data[i];
     }
 }
+
 QByteArray Paquet::ToByteArray()
 {
     char temp;

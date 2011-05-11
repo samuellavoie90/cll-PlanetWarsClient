@@ -7,6 +7,7 @@
 #include "planet.h"
 #include "magicrect.h"
 #include "thclient.h"
+#include "paquet.h"
 namespace Ui {
     class ClientMainGame;
 }
@@ -22,6 +23,7 @@ public:
     QList<Ship> Ships;
     MagicRect MRE;
     thClient *TC;
+    void TickALL(int tick);
 protected:
     void paintEvent(QPaintEvent *);
 

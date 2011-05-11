@@ -31,7 +31,43 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
 
     myQP->end();
 }
+void ClientMainGame::TickALL(int tick)
+{
+    for(int i =0;i<Planets.length();i++)
+    {
+        Planets[i].PlanetTick(tick);
+    }
+    for(int i =0;i<Ships.length();i++)
+    {
+        Ships[i].ShipTick(tick);
+    }
+}
+
 void ClientMainGame::Getmessage(QByteArray message)
 {
- emit SendInfo(message);
+Paquet *ss;
+ss->FromByteArray(message);
+switch (ss->m_Message)
+{
+case 1:
+    TickALL(ss->m_Data[0]);
+    break;
+case 2:
+Planet temp;
+temp.initialize(1,1,QList<Planet>);
+/*
+QRect Location;
+int Population;
+int PlanetNumber;
+int Player;
+int PopulationGrowth;
+bool PFocus;
+int TickTillLastPop;
+QImage PlanetImg;
+*/
+
+    break;
 }
+
+}
+//emit SendInfo(message);

@@ -10,15 +10,17 @@ class thClient : public QThread
 public:
     explicit thClient(QObject *parent = 0);
     QString m_IP;
-
+    QTcpSocket *sockClient;
+    void DisconnectFromServer();
+    bool ConnectToHost();
 signals:
-    void NewTime(QByteArray);
+    void NewTime(QByteArray);    
 
 protected:
     void run();
 
-public slots:
-
+private slots:
+void ReadytoRead();
 
 };
 

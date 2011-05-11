@@ -7,6 +7,7 @@ ClientMainGame::ClientMainGame(QWidget *parent) :
 {
     ui->setupUi(this);
     myQP = new QPainter();
+    connect(thclient, NewTime(QByteArray),this,SLOT(Getmessage(QByteArray));
 }
 
 ClientMainGame::~ClientMainGame()
@@ -29,3 +30,7 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
 
     myQP->end();
 }
+ void Getmessage(QByteArray message)
+ {
+
+ }

@@ -15,12 +15,14 @@ SOURCES += main.cpp\
     ship.cpp \
     planet.cpp \
     magicrect.cpp \
-    thclient.cpp
+    thclient.cpp \
+    paquet.cpp
 
 HEADERS  += clientmaingame.h \
     ship.h \
     planet.h \
     magicrect.h \
-    thclient.h
+    thclient.h \
+    paquet.h
 
 FORMS    += clientmaingame.ui

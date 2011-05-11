@@ -16,11 +16,13 @@ public:
 signals:
     void NewTime(QByteArray);    
 
+
 protected:
     void run();
 
 private slots:
-void ReadytoRead();
+void ReadyToRead();
+void WriteBA(QByteArray);
 
 };
 

@@ -1,9 +1,10 @@
 #include "thclient.h"
 
-thClient::thClient(QObject *parent) :
+thClient::thClient(QObject * parent) :
     QThread(parent)
 {
-    connect(sockClient,SIGNAL(ReadyRead()),this,SLOT(ReadytoRead()));
+
+
 }
 
 void thClient::run()
@@ -25,8 +26,8 @@ void thClient::ReadyToRead()
     QByteArray baReception;
     while(sockClient->bytesAvailable())
     {
-    baReception = sockClient->read(124);
-    emit NewTime(baReception);
+        baReception = sockClient->read(124);
+        emit NewTime(baReception);
     }
 }
 void thClient::DisconnectFromServer()
@@ -39,10 +40,15 @@ bool thClient::ConnectToHost()
     sockClient->connectToHost(m_IP, 32564);
     if (sockClient->waitForConnected(3000))
     {
+        connect(sockClient,SIGNAL(readyRead()),this,SLOT(ReadytoRead()));
         return true;
     }
     else
     {
         return false;
     }
+}
+void thClient::WriteBA(QByteArray ba)
+{
+sockClient->write(ba);
 }

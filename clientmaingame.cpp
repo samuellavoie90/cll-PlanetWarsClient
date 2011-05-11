@@ -1,13 +1,13 @@
 #include "clientmaingame.h"
 #include "ui_clientmaingame.h"
 
-ClientMainGame::ClientMainGame(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::ClientMainGame)
+ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::ClientMainGame)
 {
     ui->setupUi(this);
     myQP = new QPainter();
-    connect(thclient, NewTime(QByteArray),this,SLOT(Getmessage(QByteArray));
+    TC = new thClient();
+    connect(TC, SIGNAL(NewTime(QByteArray)),this,SLOT(Getmessage(QByteArray)));
+    connect (this,SIGNAL(SendInfo(QByteArray)),TC,SLOT(WriteBA(QByteArray)));
 }
 
 ClientMainGame::~ClientMainGame()
@@ -17,7 +17,8 @@ ClientMainGame::~ClientMainGame()
 void ClientMainGame::paintEvent(QPaintEvent *e)
 {
     Q_UNUSED(e);
-    myQP->begin(this);
+    myQP->begin(this);    
+    myQP->setRenderHint(QPainter::Antialiasing,true);
     for(int i =0;i<Planets.length();i++)
     {
         Planets[i].DrawPlanet(myQP);
@@ -30,7 +31,7 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
 
     myQP->end();
 }
- void Getmessage(QByteArray message)
- {
-
- }
+void ClientMainGame::Getmessage(QByteArray message)
+{
+ emit SendInfo(message);
+}

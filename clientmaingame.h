@@ -6,6 +6,7 @@
 #include "ship.h"
 #include "planet.h"
 #include "magicrect.h"
+#include "thclient.h"
 namespace Ui {
     class ClientMainGame;
 }
@@ -20,12 +21,20 @@ public:
     QList<Planet> Planets;
     QList<Ship> Ships;
     MagicRect MRE;
+    thClient *TC;
 protected:
     void paintEvent(QPaintEvent *);
 
 private:
     Ui::ClientMainGame *ui;
     QPainter *myQP;
+
+public slots:
+       void Getmessage(QByteArray message);
+signals:
+    void SendInfo(QByteArray);
+     void NewTime(QByteArray);
+
 
 };
 

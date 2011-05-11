@@ -17,7 +17,15 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
 {
     Q_UNUSED(e);
     myQP->begin(this);
-
+    for(int i =0;i<Planets.length();i++)
+    {
+        Planets[i].DrawPlanet(myQP);
+    }
+    for(int i =0;i<Ships.length();i++)
+    {
+        Ships[i].DrawShip(myQP);
+    }
+    MRE.Draw(myQP);
 
     myQP->end();
 }

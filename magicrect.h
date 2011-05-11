@@ -2,6 +2,7 @@
 #define MAGICRECT_H
 #include <QObject>
 #include <QtGui>
+#include "planet.h"
 class MagicRect
 {
 public:
@@ -11,6 +12,7 @@ public:
     QRect Rectangle1;
     QRect GetRectangle();
     void Draw(QPainter *QP);
+    void CheckPlanetsWithin(QList<Planet> Planets);
 
 };
 

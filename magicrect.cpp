@@ -31,7 +31,16 @@ QRect MagicRect::GetRectangle()
     }
     return temp;
 }
-  void Draw(QPainter *QP)
+  void MagicRect::Draw(QPainter *QP)
   {
+      QP->drawRect(GetRectangle());
+  }
+  void MagicRect::CheckPlanetsWithin(QList<Planet> Planets)
+  {
+      QRect temp = GetRectangle();
+      for(int i =0;i<Planets.length();i++)
+      {
+          Planets[i].PFocus= temp.intersects(Planets[i].Location);
+      }
 
   }

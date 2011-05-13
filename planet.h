@@ -11,6 +11,7 @@ class Planet
 public:
     explicit Planet();
     QRect Location;
+    QRect GenerationRect;
     int Population;
     int PlanetNumber;
     int Player;

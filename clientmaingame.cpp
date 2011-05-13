@@ -69,11 +69,19 @@ void ClientMainGame::Getmessage(QByteArray message)
 
 void ClientMainGame::on_pushButton_2_clicked()
 {
-    int random = 7;
+    qsrand(QTime::currentTime().msec());
+    int random = 6+qrand()%15;
      Planet temp;
      for(int i =0;i<random;i++)
      {
+         if(i==1)
+         {
          temp.initialize(1,1,Planets);
+         }
+         else
+         {
+         temp.initialize(5,1,Planets);
+         }
          Planets.append(temp);
 
      }

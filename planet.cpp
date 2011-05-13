@@ -17,23 +17,25 @@ void Planet::initialize(int Owner, int Quadrant,QList<Planet> PlanetArray)
 Player=Owner;
 bool Collision = false;
 int sizex = 512;
-int sizey = 384;
+int sizey = 768;
 QPoint temp;
 int tempsize;
 if(Quadrant!=1)
 {
-    sizex = 256;
-    sizey = 192;    
+    sizex = 512;
+    sizey = 384;
 }
 
 LoadImage();
 do    
 {
+
     Collision = false;
-    temp = QPoint(qsrand(QTime::currentTime().msec())%sizex,qsrand(QTime::currentTime().msec())%sizey);
-    PopulationGrowth = 15+qsrand(QTime::currentTime().msec())%50;
+    temp = QPoint(qrand()%sizex,qrand()%sizey);
+    PopulationGrowth = 15+qrand()%50;
     tempsize = PopulationGrowth;
     Location=QRect(temp,QSize(tempsize,tempsize));
+    GenerationRect = QRect(QPoint(temp.x()-Location.width()/2,temp.y()-Location.height()/2),QSize(Location.width()*2,Location.height()*2));
 
     while(i<PlanetCount)
     {
@@ -121,7 +123,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
 }
 bool Planet::CheckPlanetToPlanetCollision(Planet planet2)
 {
-  return Location.intersects(planet2.Location);
+  return GenerationRect.intersects(planet2.GenerationRect);
 }
 void Planet::PlanetTick(int tickAmmount)
 {

@@ -9,7 +9,7 @@ Planet::Planet()
    // bool Focus;
     TickTillLastPop=100;
 }
-void Planet::initialize(int Owner, int Quadrant, QList<Planet> p)
+void Planet::initialize(int Owner, int Quadrant,Planet PlanetArray[], int PlanetCount)
 {
     TickTillLastPop=100;
     int i =0;
@@ -26,21 +26,7 @@ if(Quadrant!=1)
     sizey = 192;    
 }
 
-if(Owner==1)
-{
-    PlanetImg.load("PB.png",0);
-}
-else
-{
-    if(Owner ==2)
-    {
-        PlanetImg.load("PR.png",0);
-    }
-    else
-    {
-        PlanetImg.load("PG.png",0);
-    }
-}
+LoadImage();
 do    
 {
     Collision = false;
@@ -157,32 +143,8 @@ Someship.Attackvalue = Population / 2;
 Population = Population /2;
 Someship.shipspeed = 2;
 Someship.Location = QRect(Location.x()+Location.width()/2,Location.y()+Location.height()/2,20,20);
-if(Player ==1)
-{
-    Someship.ShipImg.load("MB.png",0);
-}
-else
-{
-    if(Player ==2)
-    {
-        Someship.ShipImg.load("MR.png",0);
-    }
-    else
-    {
-        if(Player ==3)
-        {
-            Someship.ShipImg.load("MR.png",0);//Change Color
-        }
-        else
-        {
-            if(Player ==4)
-            {
-                Someship.ShipImg.load("MR.png",0);
-            }
-        }
-
-    }
-}
+Someship.Player = Player;
+Someship.LoadImage();
 
 return Someship;
 }
@@ -196,3 +158,76 @@ bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet)
 {
 return SomeShip.Location.intersects(SomePlanet.Location);
 }
+ void Planet::initializeFromint(int W[])
+ {
+     //QPoint Location;
+     //int Population;
+     //int Player;
+    // int PopulationGrowth;
+    // bool Focus;
+     PFocus = false;
+     Player = W[0];
+     PopulationGrowth = W[1];
+     Population = W[2];
+     Location = QRect(QPoint(W[3],W[4]),QSize(W[5],W[6]));
+    LoadImage();
+
+
+
+ }
+ void Planet::LoadImage()
+ {
+     if(Player ==1)
+     {
+     PlanetImg.load("PB.png",0);
+     }
+     else
+     if(Player ==2)
+     {
+     PlanetImg.load("PR.png",0);
+     }
+     else
+     if(Player ==3)
+     {
+     PlanetImg.load("PB.png",0);
+     }
+     else
+     if(Player ==4)
+     {
+     PlanetImg.load("PB.png",0);
+     }
+     else
+         if(Player ==5)
+         {
+             PlanetImg.load("PG.png",0);
+         }
+
+ }
+ Ship Planet::shipFromByteArray(int Data[])
+ {
+     /*
+     bool shipLaunched;
+     int TickstoLauch;
+     QPoint StartLocation;
+     QPoint Destination;
+     int Attackvalue;
+     int shipspeed;
+     QRect Location;
+     void ShipTick(int TickCount);
+     void DrawShip(QPainter *);
+     QImage ShipImg;
+     */
+     Ship temp;
+     temp.shipLaunched = false;
+     temp.TickstoLauch = 10;
+     temp.Player = Player;
+
+     temp.StartLocation = QPoint(Data[0],Data[1]);
+     temp.Destination = QPoint(Data[2],Data[3]);
+     temp.Attackvalue = Population / 2;
+     Population = Population /2;
+     temp.shipspeed = Data[4];
+     temp.Location = QRect(Location.x()+Location.width()/2,Location.y()+Location.height()/2,20,20);
+     temp.LoadImage();
+     return temp;
+ }

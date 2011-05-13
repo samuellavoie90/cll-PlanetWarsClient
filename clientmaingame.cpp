@@ -54,18 +54,7 @@ case 1:
     break;
 case 2:
 Planet temp;
-temp.initialize(1,1,QList<Planet>);
-/*
-QRect Location;
-int Population;
-int PlanetNumber;
-int Player;
-int PopulationGrowth;
-bool PFocus;
-int TickTillLastPop;
-QImage PlanetImg;
-*/
-
+temp.initializeFromint(ss->m_Data);
     break;
 }
 

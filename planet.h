@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QtGui>
 #include "ship.h"
-
+#include "paquet.h"
 class Planet
 {
     //Q_OBJECT
@@ -23,12 +23,17 @@ public:
    //int planettype;
 
     Ship CreateShip(Planet Destination);
-    void initialize(int Owner, int Quadrant, Planet *PlanetArray,int PlanetCount);
+
+    Ship shipFromByteArray(int Data[]);
+   void initialize(int Owner, int Quadrant,Planet PlanetArray[], int PlanetCount);
     void MirrorPlanet(Planet SomePlanet,int Quadrant,int PlanetCount);
     bool CheckPlanetToPlanetCollision(Planet planet2);
     void DrawPlanet(QPainter *);
     void PlanetTick(int tickAmmount);
    bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet);
+   void initializeFromint(int W[]);
+private:
+    void LoadImage();
 signals:
 
 public slots:

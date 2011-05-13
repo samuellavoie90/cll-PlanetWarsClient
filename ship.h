@@ -18,6 +18,8 @@ public:
     void ShipTick(int TickCount);
     void DrawShip(QPainter *);
     QImage ShipImg;
+    int Player;
+    void LoadImage();
 //
     static bool CheckShipToShipCollision(Ship ship1, Ship ship2);
 //une variable de texture

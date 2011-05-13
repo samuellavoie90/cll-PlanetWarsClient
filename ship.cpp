@@ -47,3 +47,26 @@ bool Ship::CheckShipToShipCollision(Ship ship1, Ship ship2)
     return ship1.Location.intersects(ship2.Location);
 }
 
+void Ship::LoadImage()
+{
+    if(Player == 1)
+    {
+        ShipImg.load("MB.png",0);
+    }
+    else
+        if(Player == 2)
+        {
+            ShipImg.load("MR.png",0);
+        }
+        else
+            if(Player == 3)
+            {
+                ShipImg.load("MB.png",0);
+            }
+            else
+                if(Player == 4)
+                {
+                    ShipImg.load("MB.png",0);
+                }
+}
+

@@ -37,6 +37,7 @@ public slots:
 signals:
     void SendInfo(QByteArray);
      void NewTime(QByteArray);
+     void repaint();
 
 
 private slots:

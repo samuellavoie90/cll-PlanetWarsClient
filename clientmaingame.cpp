@@ -96,7 +96,7 @@ void ClientMainGame::on_pushButton_2_clicked()
 }
 void ClientMainGame::OnTimerTick()
 {
-repaint();
+update();
 }
 
 void ClientMainGame::on_pushButton_3_clicked()
@@ -105,6 +105,8 @@ void ClientMainGame::on_pushButton_3_clicked()
     qsrand(QTime::currentTime().msec());
     int random = 8+qrand()%6;
      Planet temp;
+     ui->frame->setVisible(false);
+     Timer->start();
      for(int i =0;i<random;i++)
      {
          if(i==1)
@@ -117,13 +119,13 @@ void ClientMainGame::on_pushButton_3_clicked()
          }
          Planets.append(temp);
 
+
      }
      for(int i = 0;i<random;i++)
      {
          temp.MirrorPlanet(Planets[i],2,Planets.length());
          Planets.append(temp);
      }
-     ui->frame->setVisible(false);
-     Timer->start();
+
 
 }

@@ -11,7 +11,6 @@ Planet::Planet()
 }
 void Planet::initialize(int Owner, int Quadrant,QList<Planet> PlanetArray)
 {
-    int PlanetCount = PlanetArray.length();
     TickTillLastPop=100;
     int i =0;
 Player=Owner;
@@ -30,26 +29,22 @@ LoadImage();
 do    
 {
 
-    Collision = false;
     temp = QPoint(qrand()%sizex,qrand()%sizey);
     PopulationGrowth = 15+qrand()%50;
     tempsize = PopulationGrowth;
     Location=QRect(temp,QSize(tempsize,tempsize));
     GenerationRect = QRect(QPoint(temp.x()-Location.width()/2,temp.y()-Location.height()/2),QSize(Location.width()*2,Location.height()*2));
+    i=0;
+    while(i<PlanetArray.length())
+    {     
+       Collision = CheckPlanetToPlanetCollision(PlanetArray[i]);
+       i++;
 
-    while(i<PlanetCount)
-    {
-        if(CheckPlanetToPlanetCollision(PlanetArray[i]))
-        {
-            Collision = true;
-        }
-
-        i++;
     }
     PlanetNumber=i;
 
 }while(Collision);
-Population= PopulationGrowth;//A checker pour des erreur en debug plustard
+Population= PopulationGrowth;
 PFocus = false;
 
 }
@@ -123,7 +118,9 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
 }
 bool Planet::CheckPlanetToPlanetCollision(Planet planet2)
 {
+
   return GenerationRect.intersects(planet2.GenerationRect);
+
 }
 void Planet::PlanetTick(int tickAmmount)
 {

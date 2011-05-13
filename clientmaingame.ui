@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1100</width>
-    <height>768</height>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -81,6 +81,19 @@
       <string>Generate Random Test Map 1v1</string>
      </property>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>10</y>
+      <width>251</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generate Random Test Map 1v1</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

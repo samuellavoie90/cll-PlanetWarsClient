@@ -16,8 +16,8 @@ void Planet::initialize(int Owner, int Quadrant,QList<Planet> PlanetArray)
     int i =0;
 Player=Owner;
 bool Collision = false;
-int sizex = 512;
-int sizey = 768;
+int sizex = 480;
+int sizey = 770;
 QPoint temp;
 int tempsize;
 if(Quadrant!=1)
@@ -113,7 +113,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
         Player=5;
         PlanetImg.load("PG.png",0);
     }
-    Location = QRect(QPoint(placex-SomePlanet.Location.x(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
+    Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
     Player=SomePlanet.Player;
     PopulationGrowth=PopulationGrowth;
     Population =SomePlanet.Population;

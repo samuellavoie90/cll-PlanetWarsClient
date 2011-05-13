@@ -8,6 +8,10 @@ ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(
     TC = new thClient();
     connect(TC, SIGNAL(NewTime(QByteArray)),this,SLOT(Getmessage(QByteArray)));
     connect (this,SIGNAL(SendInfo(QByteArray)),TC,SLOT(WriteBA(QByteArray)));
+    Timer = new QTimer(parent);
+    Timer->setInterval(40);
+    connect(Timer,SIGNAL(timeout()),this,SLOT(OnTimerTick()));
+
 }
 
 ClientMainGame::~ClientMainGame()
@@ -17,7 +21,7 @@ ClientMainGame::~ClientMainGame()
 void ClientMainGame::paintEvent(QPaintEvent *e)
 {
     Q_UNUSED(e);
-    myQP->begin(this);    
+    myQP->begin(this);
     myQP->setRenderHint(QPainter::Antialiasing,true);
     for(int i =0;i<Planets.length();i++)
     {
@@ -30,6 +34,7 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
     MRE.Draw(myQP);
 
     myQP->end();
+
 }
 void ClientMainGame::TickALL(int tick)
 {
@@ -45,18 +50,43 @@ void ClientMainGame::TickALL(int tick)
 
 void ClientMainGame::Getmessage(QByteArray message)
 {
-Paquet *ss;
-ss->FromByteArray(message);
-switch (ss->m_Message)
-{
-case 1:
-    TickALL(ss->m_Data[0]);
-    break;
-case 2:
-Planet temp;
-temp.initializeFromint(ss->m_Data);
-    break;
-}
+    Paquet *ss;
+    ss->FromByteArray(message);
+    switch (ss->m_Message)
+    {
+    case 1:
+        TickALL(ss->m_Data[0]);
+        break;
+    case 2:
+        Planet temp;
+        temp.initializeFromint(ss->m_Data);
+        break;
+    }
 
 }
 //emit SendInfo(message);
+
+
+void ClientMainGame::on_pushButton_2_clicked()
+{
+    int random = 7;
+     Planet temp;
+     for(int i =0;i<random;i++)
+     {
+         temp.initialize(1,1,Planets);
+         Planets.append(temp);
+
+     }
+     for(int i = 0;i<random;i++)
+     {
+         temp.MirrorPlanet(Planets[i],2,Planets.length());
+         Planets.append(temp);
+     }
+     ui->frame->setVisible(false);
+     Timer->start();
+
+}
+void ClientMainGame::OnTimerTick()
+{
+repaint();
+}

@@ -9,13 +9,13 @@ Planet::Planet()
    // bool Focus;
     TickTillLastPop=100;
 }
-void Planet::initialize(int Owner, int Quadrant,Planet PlanetArray[], int PlanetCount)
+void Planet::initialize(int Owner, int Quadrant,QList<Planet> PlanetArray)
 {
+    int PlanetCount = PlanetArray.length();
     TickTillLastPop=100;
     int i =0;
 Player=Owner;
 bool Collision = false;
-//PopulationGrowth = PlanetSize;
 int sizex = 512;
 int sizey = 384;
 QPoint temp;
@@ -30,8 +30,8 @@ LoadImage();
 do    
 {
     Collision = false;
-    temp = QPoint(qrand()%sizex,qrand()%sizey);
-    PopulationGrowth = 15+qrand()%50;
+    temp = QPoint(qsrand(QTime::currentTime().msec())%sizex,qsrand(QTime::currentTime().msec())%sizey);
+    PopulationGrowth = 15+qsrand(QTime::currentTime().msec())%50;
     tempsize = PopulationGrowth;
     Location=QRect(temp,QSize(tempsize,tempsize));
 

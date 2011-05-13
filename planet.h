@@ -25,8 +25,8 @@ public:
     Ship CreateShip(Planet Destination);
 
     Ship shipFromByteArray(int Data[]);
-   void initialize(int Owner, int Quadrant,Planet PlanetArray[], int PlanetCount);
-    void MirrorPlanet(Planet SomePlanet,int Quadrant,int PlanetCount);
+   void initialize(int Owner, int Quadrant,QList<Planet> PlanetArray);
+    void MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount);
     bool CheckPlanetToPlanetCollision(Planet planet2);
     void DrawPlanet(QPainter *);
     void PlanetTick(int tickAmmount);

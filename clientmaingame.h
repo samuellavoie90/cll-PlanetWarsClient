@@ -24,6 +24,7 @@ public:
     MagicRect MRE;
     thClient *TC;
     void TickALL(int tick);
+    QTimer *Timer;
 protected:
     void paintEvent(QPaintEvent *);
 
@@ -38,6 +39,9 @@ signals:
      void NewTime(QByteArray);
 
 
+private slots:
+     void on_pushButton_2_clicked();
+     void OnTimerTick();
 };
 
 #endif // CLIENTMAINGAME_H

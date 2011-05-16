@@ -36,6 +36,12 @@ void Ship::ShipTick(int TickCount)
 void Ship::DrawShip(QPainter *QP)
 {
     QP->drawImage(Location,ShipImg);
+
+    QColor tempColor = QColor();
+    tempColor.setRgb(255,255,255,255);
+    QPen temppen = QPen(tempColor);
+    QP->setPen(temppen);
+    QP->drawText(QPoint(Location.x()+Location.width()/2-4,Location.y()+Location.height()/2),QString::number(Attackvalue,10));
 }
 /*bool Ship::CheckShipToPlanetCollision(Planet SomePlanet)
 {

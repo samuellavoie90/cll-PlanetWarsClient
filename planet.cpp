@@ -43,10 +43,15 @@ do
     Location=QRect(temp,QSize(tempsize,tempsize));
     GenerationRect = QRect(QPoint(temp.x()-Location.width()/2,temp.y()-Location.height()/2),QSize(Location.width()*2,Location.height()*2));
     i=0;
+    Collision = false;
     while(i<PlanetArray.length())
     {     
-       Collision = CheckPlanetToPlanetCollision(PlanetArray[i]);
-       i++;
+        if(CheckPlanetToPlanetCollision(PlanetArray[i]))
+        {
+            Collision = true;
+            i= PlanetArray.length();
+        }
+        i++;
 
     }
     PlanetNumber=i;
@@ -172,6 +177,11 @@ return Someship;
 void Planet::DrawPlanet(QPainter *QP)
 {
 QP->drawImage(Location,PlanetImg);
+QColor tempColor = QColor();
+tempColor.setRgb(255,255,255,255);
+QPen temppen = QPen(tempColor);
+QP->setPen(temppen);
+QP->drawText(QPoint(Location.x()+Location.width()/2-7,Location.y()+Location.height()/2),QString::number(Population,10));
 
 }
 
@@ -192,9 +202,6 @@ return SomeShip.Location.intersects(SomePlanet.Location);
      Population = W[2];
      Location = QRect(QPoint(W[3],W[4]),QSize(W[5],W[6]));
     LoadImage();
-
-
-
  }
  void Planet::LoadImage()
  {

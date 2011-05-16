@@ -10,11 +10,12 @@ QRect MagicRect::GetRectangle()
     {
         if(TopLeft.x()>BotRight.x())
         {
-            temp=QRect(BotRight,TopLeft);
+          temp=QRect(TopLeft.x(),BotRight.y(),TopLeft.x()-BotRight.x(),BotRight.y()-TopLeft.y());
         }
         else
         {
-            temp=QRect(TopLeft.x(),BotRight.y(),TopLeft.x()-BotRight.x(),BotRight.y()-TopLeft.y());
+              temp=QRect(BotRight,TopLeft);
+
         }
     }
     else

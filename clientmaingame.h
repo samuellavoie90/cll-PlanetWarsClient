@@ -26,6 +26,10 @@ public:
     void TickALL(int tick);
     QTimer *Timer;
     QImage background;
+    bool MousePressed;
+    void mousePressEvent(QMouseEvent * Stuff);
+    void mouseReleaseEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
 protected:
     void paintEvent(QPaintEvent *);
 

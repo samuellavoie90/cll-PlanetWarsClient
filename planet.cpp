@@ -28,9 +28,17 @@ if(Quadrant!=1)
 LoadImage();
 do    
 {
+    if(Player!=1)
+    {
+        temp = QPoint(qrand()%sizex,qrand()%sizey);
+        PopulationGrowth = 15+qrand()%50;
+    }
 
-    temp = QPoint(qrand()%sizex,qrand()%sizey);
-    PopulationGrowth = 15+qrand()%50;
+    else
+    {
+        temp = QPoint(qrand()%(sizex-40),qrand()%(sizey-40));
+        PopulationGrowth = 20+qrand()%45;
+    }
     tempsize = PopulationGrowth;
     Location=QRect(temp,QSize(tempsize,tempsize));
     GenerationRect = QRect(QPoint(temp.x()-Location.width()/2,temp.y()-Location.height()/2),QSize(Location.width()*2,Location.height()*2));
@@ -118,8 +126,22 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
 }
 bool Planet::CheckPlanetToPlanetCollision(Planet planet2)
 {
-
-  return GenerationRect.intersects(planet2.GenerationRect);
+    QRect temp = QRect(QPoint(0,0),QSize(1100,900));
+    if(GenerationRect.intersects(planet2.GenerationRect))
+    {
+        return true;
+    }
+    else
+    {
+    if(GenerationRect.intersects(temp))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+    }
 
 }
 void Planet::PlanetTick(int tickAmmount)

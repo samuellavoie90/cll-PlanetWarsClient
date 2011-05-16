@@ -4,6 +4,7 @@
 ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(new Ui::ClientMainGame)
 {
     ui->setupUi(this);
+     background.load("bg.jpg",0);
     myQP = new QPainter();
     TC = new thClient();
     connect(TC, SIGNAL(NewTime(QByteArray)),this,SLOT(Getmessage(QByteArray)));
@@ -11,6 +12,7 @@ ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(
     Timer = new QTimer(parent);
     Timer->setInterval(40);
     connect(Timer,SIGNAL(timeout()),this,SLOT(OnTimerTick()));
+
 
 }
 
@@ -23,6 +25,7 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
     Q_UNUSED(e);
     myQP->begin(this);
     myQP->setRenderHint(QPainter::Antialiasing,true);
+    myQP->drawImage(QRect(QPoint(0,0),QSize(1200,1000)),background);
     for(int i =0;i<Planets.length();i++)
     {
         Planets[i].DrawPlanet(myQP);
@@ -52,14 +55,19 @@ void ClientMainGame::Getmessage(QByteArray message)
 {
     Paquet *ss;
     ss->FromByteArray(message);
+    Planet temp;
     switch (ss->m_Message)
     {
     case 1:
         TickALL(ss->m_Data[0]);
         break;
-    case 2:
-        Planet temp;
+    case 2:        
         temp.initializeFromint(ss->m_Data);
+        break;
+    case 3:
+        Ship temp2;
+        temp2=temp.PaquetToShip(*ss,Planets);
+        Ships.append(temp2);
         break;
     }
 
@@ -87,7 +95,7 @@ void ClientMainGame::on_pushButton_2_clicked()
      }
      for(int i = 0;i<random;i++)
      {
-         temp.MirrorPlanet(Planets[i],2,Planets.length());
+         temp.MirrorPlanet(Planets[i],2,Planets.length());         
          Planets.append(temp);
      }
      ui->frame->setVisible(false);
@@ -124,8 +132,17 @@ void ClientMainGame::on_pushButton_3_clicked()
      for(int i = 0;i<random;i++)
      {
          temp.MirrorPlanet(Planets[i],2,Planets.length());
+         temp.Location.moveRight(temp.Location.x()+120);
          Planets.append(temp);
      }
 
 
+}
+
+void ClientMainGame::on_pushButton_clicked()
+{
+    TC->m_IP=ui->txtIPAdress->text();
+    TC->ConnectToHost();
+     Planets.clear();
+     ui->frame->setVisible(false);
 }

@@ -43,11 +43,6 @@ void Ship::DrawShip(QPainter *QP)
     QP->setPen(temppen);
     QP->drawText(QPoint(Location.x()+Location.width()/2-4,Location.y()+Location.height()/2),QString::number(Attackvalue,10));
 }
-/*bool Ship::CheckShipToPlanetCollision(Planet SomePlanet)
-{
-    return Location.intersects(SomePlanet.Location);
-
-}*/
 bool Ship::CheckShipToShipCollision(Ship ship1, Ship ship2)
 {
     return ship1.Location.intersects(ship2.Location);
@@ -74,5 +69,13 @@ void Ship::LoadImage()
                 {
                     ShipImg.load("MB.png",0);
                 }
+}
+Paquet Ship::ShipToPacket()
+{
+   int data[30];
+    data[0]=  StartPlanet;
+    data[1] = EndPlanet;
+    Paquet p= Paquet(3,Player,data);
+return p;
 }
 

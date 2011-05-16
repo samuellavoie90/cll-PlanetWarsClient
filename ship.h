@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QtGui>
+#include "paquet.h"
 class Ship
 {
 
@@ -13,6 +14,8 @@ public:
     QPoint StartLocation;
     QPoint Destination;
     int Attackvalue;
+    int StartPlanet;
+    int EndPlanet;
     int shipspeed;
     QRect Location;
     void ShipTick(int TickCount);
@@ -20,6 +23,8 @@ public:
     QImage ShipImg;
     int Player;
     void LoadImage();
+    Paquet ShipToPacket();
+
 //
     static bool CheckShipToShipCollision(Ship ship1, Ship ship2);
 //une variable de texture

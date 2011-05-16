@@ -10,7 +10,7 @@ class thClient : public QThread
 public:
     explicit thClient(QObject *parent = 0);
     QString m_IP;
-    QTcpSocket *sockClient;
+    QTcpSocket *m_sockClient;
     void DisconnectFromServer();
     bool ConnectToHost();
 signals:

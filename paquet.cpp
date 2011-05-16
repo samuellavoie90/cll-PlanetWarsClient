@@ -37,15 +37,15 @@ QByteArray Paquet::ToByteArray()
 }
 void Paquet::FromByteArray(QByteArray unBA)
 {
-    m_Message = unBA[0] | (unBA[1] << 8);
-    m_Player = unBA[2] | (unBA[3] << 8);
+    m_Message =(short)unBA[0] | (((short)unBA[1]) << 8);
+    m_Player = (short)unBA[2] | (((short)unBA[3]) << 8);
     int j = 0;
     for(int i = 0; i < 30; i++)
     {
         m_Data[i] = 0;
         for(int k = 0; k < 4; k++)
         {
-            m_Data[i] |= (unBA[j] << 8*k);
+            m_Data[i] |= (((short)unBA[j]) << (8*k));
             j++;
         }
     }

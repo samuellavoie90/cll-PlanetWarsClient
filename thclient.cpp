@@ -3,6 +3,8 @@
 thClient::thClient(QObject * parent) :
     QThread(parent)
 {
+        m_sockClient = new QTcpSocket();
+        connect(m_sockClient,SIGNAL(readyRead()),this,SLOT(ReadyToRead()));
 
 
 }
@@ -11,36 +13,36 @@ void thClient::run()
 {
    /* QByteArray baReception;
 
-        while(sockClient.waitForReadyRead(1000))
+        while(m_sockClient.waitForReadyRead(1000))
         {
-            baReception = sockClient.readAll();
+            baReception = m_sockClient.readAll();
             emit NewTime(baReception);
             baReception.clear();
         }
-        sockClient.disconnectFromHost();
-        sockClient.close();
+        m_sockClient.disconnectFromHost();
+        m_sockClient.close();
     }*/
 }
 void thClient::ReadyToRead()
 {
     QByteArray baReception;
-    while(sockClient->bytesAvailable())
+    while(m_sockClient->bytesAvailable())
     {
-        baReception = sockClient->read(124);
+        baReception = m_sockClient->read(124);
         emit NewTime(baReception);
     }
 }
 void thClient::DisconnectFromServer()
 {
-    sockClient->disconnectFromHost();
-    sockClient->close();
+    m_sockClient->disconnectFromHost();
+    m_sockClient->close();
 }
 bool thClient::ConnectToHost()
 {
-    sockClient->connectToHost(m_IP, 32564);
-    if (sockClient->waitForConnected(3000))
+    m_sockClient->connectToHost(m_IP, 35994);
+    if (m_sockClient->waitForConnected(3000))
     {
-        connect(sockClient,SIGNAL(readyRead()),this,SLOT(ReadytoRead()));
+
         return true;
     }
     else
@@ -50,5 +52,5 @@ bool thClient::ConnectToHost()
 }
 void thClient::WriteBA(QByteArray ba)
 {
-sockClient->write(ba);
+m_sockClient->write(ba);
 }

@@ -13,6 +13,7 @@ public:
     QTcpSocket *m_sockClient;
     void DisconnectFromServer();
     bool ConnectToHost();
+    QByteArray baReception;
 signals:
     void NewTime(QByteArray);    
 

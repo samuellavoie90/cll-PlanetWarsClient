@@ -25,7 +25,7 @@ void thClient::run()
 }
 void thClient::ReadyToRead()
 {
-    QByteArray baReception;
+    baReception = *new QByteArray();
     while(m_sockClient->bytesAvailable())
     {
         baReception = m_sockClient->read(124);

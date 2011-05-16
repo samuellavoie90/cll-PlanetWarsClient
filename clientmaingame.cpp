@@ -53,7 +53,7 @@ void ClientMainGame::TickALL(int tick)
 
 void ClientMainGame::Getmessage(QByteArray message)
 {
-    Paquet *ss;
+    Paquet *ss = new Paquet();
     ss->FromByteArray(message);
     Planet temp;
     switch (ss->m_Message)
@@ -63,6 +63,7 @@ void ClientMainGame::Getmessage(QByteArray message)
         break;
     case 2:        
         temp.initializeFromint(ss->m_Data);
+        Planets.append(temp);
         break;
     case 3:
         Ship temp2;
@@ -70,6 +71,7 @@ void ClientMainGame::Getmessage(QByteArray message)
         Ships.append(temp2);
         break;
     }
+    Timer->start();
 
 }
 //emit SendInfo(message);

@@ -7,6 +7,7 @@ class Paquet
 {
 public:
     Paquet(short Message, short Player, int Data[]);
+    Paquet();
     short m_Message;
     short m_Player;
     int m_Data[30];

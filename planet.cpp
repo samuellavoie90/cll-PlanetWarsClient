@@ -74,7 +74,6 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
         {
             if(SomePlanet.Player==1)
             {
-                PlanetImg.load("PR.png",0);
                 Player=2;
             }
             placex = 1024;
@@ -87,7 +86,6 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
         {
             if(SomePlanet.Player==1)
             {
-                PlanetImg.load("PR.png",0);//change for other color later
                 Player=3;
             }
             placex = SomePlanet.Location.x()*2;
@@ -99,8 +97,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
         if(Quadrant==4)
         {
             if(SomePlanet.Player==1)
-            {
-                PlanetImg.load("PR.png",0);
+            {                
                 Player=4;
             }
             placex = 1024;
@@ -112,7 +109,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
         //1 Quadrant means its a 1v1 game, so generate for player 2
         if(SomePlanet.Player==1)
         {
-            PlanetImg.load("PR.png",0);
+
             Player=2;
         }
     }
@@ -120,8 +117,9 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     if(SomePlanet.Player == 5)
     {
         Player=5;
-        PlanetImg.load("PG.png",0);
+
     }
+    LoadImage();
     Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
     Player=SomePlanet.Player;
     PopulationGrowth=PopulationGrowth;
@@ -228,12 +226,12 @@ bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
      else
      if(Player ==3)
      {
-     PlanetImg.load("PB.png",0);
+     PlanetImg.load("PGG.png",0);
      }
      else
      if(Player ==4)
      {
-     PlanetImg.load("PB.png",0);
+     PlanetImg.load("PY.png",0);
      }
      else
          if(Player ==5)

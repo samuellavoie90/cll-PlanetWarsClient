@@ -65,12 +65,12 @@ void Ship::LoadImage()
         else
             if(Player == 3)
             {
-                ShipImg.load("MB.png",0);
+                ShipImg.load("MG.png",0);
             }
             else
                 if(Player == 4)
                 {
-                    ShipImg.load("MB.png",0);
+                    ShipImg.load("MY.png",0);
                 }
 }
 Paquet Ship::ShipToPacket()

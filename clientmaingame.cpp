@@ -45,12 +45,20 @@ void ClientMainGame::paintEvent(QPaintEvent *e)
 }
 void ClientMainGame::mousePressEvent(QMouseEvent * Stuff)
 {
-    MRE.TopLeft=QPoint(Stuff->pos());
-    MousePressed=true;
+    if(Stuff->button()==Qt::LeftButton)
+    {
+        MRE.TopLeft=QPoint(Stuff->pos());
+        MousePressed=true;
+    }
 }
-void ClientMainGame::mouseReleaseEvent(QMouseEvent *)
+void ClientMainGame::mouseReleaseEvent(QMouseEvent * Stuff)
 {
-    MousePressed = false;
+    if(Stuff->button()==Qt::LeftButton)
+    {
+        MousePressed = false;
+        MRE.CheckPlanetsWithin(Planets,PlayerID);
+    }
+
 }
 void ClientMainGame::mouseMoveEvent(QMouseEvent * Stuff)
 {
@@ -77,6 +85,7 @@ void ClientMainGame::Getmessage(QByteArray message)
     Paquet *ss = new Paquet();
     ss->FromByteArray(message);
     Planet temp;
+    Ship temp2;
     switch (ss->m_Message)
     {
     case 1:
@@ -87,9 +96,11 @@ void ClientMainGame::Getmessage(QByteArray message)
         Planets.append(temp);
         break;
     case 3:
-        Ship temp2;
         temp2=temp.PaquetToShip(*ss,Planets);
         Ships.append(temp2);
+        break;
+     case 4:
+        PlayerID=ss->m_Player;
         break;
     }
     Timer->start();

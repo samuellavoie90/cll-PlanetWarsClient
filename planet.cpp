@@ -19,6 +19,7 @@ int sizex = 480;
 int sizey = 770;
 QPoint temp;
 int tempsize;
+PlanetNumber=PlanetArray.length();
 if(Quadrant!=1)
 {
     sizex = 512;
@@ -54,7 +55,7 @@ do
         i++;
 
     }
-    PlanetNumber=i;
+
 
 }while(Collision);
 Population= PopulationGrowth;
@@ -187,9 +188,17 @@ QP->drawText(QPoint(Location.x()+Location.width()/2-7,Location.y()+Location.heig
 
 }
 
-bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet)
+bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
 {
-return SomeShip.Location.intersects(SomePlanet.Location);
+    if(SomeShip.Location.intersects(SomePlanet->Location))
+    {
+        SomePlanet->PFocus = false;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
  void Planet::initializeFromint(int W[])
  {

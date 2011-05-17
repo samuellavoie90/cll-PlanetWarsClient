@@ -18,6 +18,9 @@ void Ship::ShipTick(int TickCount)
     if(shipLaunched)
     {
         double PercentX;
+        double PercentY;
+        PercentX = StartLocation.x()/Destination.x();
+        PercentY = StartLocation.y()/Destination.y();
 
 
     }
@@ -78,4 +81,5 @@ Paquet Ship::ShipToPacket()
     Paquet p= Paquet(3,Player,data);
 return p;
 }
+
 

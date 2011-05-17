@@ -31,7 +31,7 @@ public:
     bool CheckPlanetToPlanetCollision(Planet planet2);
     void DrawPlanet(QPainter *);
     void PlanetTick(int tickAmmount);
-   bool CheckShipToPlanetCollision(Ship SomeShip, Planet SomePlanet);
+   bool CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet);
    void initializeFromint(int W[]);
 
    Ship PaquetToShip(Paquet p, QList<Planet>);

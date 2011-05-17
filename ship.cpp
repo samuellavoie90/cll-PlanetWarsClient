@@ -19,10 +19,10 @@ void Ship::ShipTick(int TickCount)
     {
         double PercentX;
         double PercentY;
-        PercentX = StartLocation.x()/Destination.x();
-        PercentY = StartLocation.y()/Destination.y();
-
-
+        PercentX = (double)StartLocation.x()/(double)Destination.x();
+        PercentY = (double)StartLocation.y()/(double)Destination.y();
+        Location.moveRight(Location.x()+PercentX*shipspeed);
+        Location.moveBottom(Location.y()+PercentY*shipspeed);
     }
     else
     {

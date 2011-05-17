@@ -67,7 +67,6 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     TickTillLastPop=100;
     int placex = 1024;
     int placey = 768;
-    Player=2;
     if(Quadrant!=1)
     {
         if(Quadrant==2)
@@ -79,7 +78,6 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
             placex = 1024;
             placey = SomePlanet.Location.y()*2;
              Player=2;
-
         }
         else
         if(Quadrant==3)
@@ -109,7 +107,6 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
         //1 Quadrant means its a 1v1 game, so generate for player 2
         if(SomePlanet.Player==1)
         {
-
             Player=2;
         }
     }
@@ -117,7 +114,6 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     if(SomePlanet.Player == 5)
     {
         Player=5;
-
     }
     LoadImage();
     Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
@@ -239,34 +235,6 @@ bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
              PlanetImg.load("PG.png",0);
          }
 
- }
- Ship Planet::shipFromByteArray(int Data[])
- {
-     /*
-     bool shipLaunched;
-     int TickstoLauch;
-     QPoint StartLocation;
-     QPoint Destination;
-     int Attackvalue;
-     int shipspeed;
-     QRect Location;
-     void ShipTick(int TickCount);
-     void DrawShip(QPainter *);
-     QImage ShipImg;
-     */
-     Ship temp;
-     temp.shipLaunched = false;
-     temp.TickstoLauch = 10;
-     temp.Player = Player;
-
-     temp.StartLocation = QPoint(Data[0],Data[1]);
-     temp.Destination = QPoint(Data[2],Data[3]);
-     temp.Attackvalue = Population / 2;
-     Population = Population /2;
-     temp.shipspeed = Data[4];
-     temp.Location = QRect(Location.x()+Location.width()/2,Location.y()+Location.height()/2,20,20);
-     temp.LoadImage();
-     return temp;
  }
 
  Ship Planet::PaquetToShip(Paquet p, QList<Planet> Planets)

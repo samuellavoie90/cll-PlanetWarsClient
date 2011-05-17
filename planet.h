@@ -23,9 +23,7 @@ public:
     //une variable de texture
    //int planettype;
 
-    Ship CreateShip(Planet Destination);
-
-    Ship shipFromByteArray(int Data[]);
+   Ship CreateShip(Planet Destination);
    void initialize(int Owner, int Quadrant,QList<Planet> PlanetArray);
     void MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount);
     bool CheckPlanetToPlanetCollision(Planet planet2);

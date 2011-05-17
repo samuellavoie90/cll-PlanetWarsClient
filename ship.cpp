@@ -36,6 +36,7 @@ void Ship::ShipTick(int TickCount)
 
 }
 
+
 void Ship::DrawShip(QPainter *QP)
 {
     QP->drawImage(Location,ShipImg);

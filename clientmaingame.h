@@ -23,6 +23,7 @@ public:
     QList<Ship> Ships;
     MagicRect MRE;
     thClient *TC;
+    QRect WindowRes;
     int PlayerID;
     void TickALL(int tick);
     QTimer *Timer;

@@ -13,6 +13,7 @@ ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(
     Timer->setInterval(40);
     connect(Timer,SIGNAL(timeout()),this,SLOT(OnTimerTick()));
     MousePressed = false;
+    WindowRes = this->geometry();
 
 
 }

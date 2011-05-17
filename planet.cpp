@@ -22,8 +22,8 @@ int tempsize;
 PlanetNumber=PlanetArray.length();
 if(Quadrant!=1)
 {
-    sizex = 512;
-    sizey = 384;
+    sizex = 480;
+    sizey = 350;
 }
 
 LoadImage();

@@ -31,8 +31,6 @@ public:
     void PlanetTick(int tickAmmount);
    bool CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet);
    void initializeFromint(int W[]);
-
-   Ship PaquetToShip(Paquet p, QList<Planet>);
 private:
     void LoadImage();
 signals:

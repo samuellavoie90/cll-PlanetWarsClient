@@ -10,7 +10,7 @@ ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(
     connect(TC, SIGNAL(NewTime(QByteArray)),this,SLOT(Getmessage(QByteArray)));
     connect (this,SIGNAL(SendInfo(QByteArray)),TC,SLOT(WriteBA(QByteArray)));
     Timer = new QTimer(parent);
-    Timer->setInterval(40);
+    Timer->setInterval(42);
     connect(Timer,SIGNAL(timeout()),this,SLOT(OnTimerTick()));
     MousePressed = false;
     WindowRes = this->geometry();
@@ -21,6 +21,9 @@ ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(
 
 ClientMainGame::~ClientMainGame()
 {
+    delete TC->m_sockClient;
+    delete TC;
+    delete Timer;
     delete ui;
 }
 void ClientMainGame::paintEvent(QPaintEvent *e)
@@ -58,7 +61,7 @@ void ClientMainGame::mousePressEvent(QMouseEvent * Stuff)
         QRect cursor = QRect(Stuff->pos(),QSize(1,1));
         Ship temp;
         int AttackedPlanetNumber = 0;
-        Paquet SomeShip;
+        Paquet temp2;
         for(int  i = 0;i<Planets.length();i++)
         {
             if(cursor.intersects(Planets[i].Location))
@@ -72,8 +75,8 @@ void ClientMainGame::mousePressEvent(QMouseEvent * Stuff)
             if(Planets[i].PFocus  && AttackedPlanetNumber!=i)
             {
                 temp =Planets[i].CreateShip(Planets[AttackedPlanetNumber]);
-                SomeShip = temp.ShipToPacket();
-                emit SendInfo(SomeShip.ToByteArray());
+                temp2 = temp.ShipToPacket();
+                emit SendInfo(temp2.ToByteArray());
             }
         }
     }
@@ -88,7 +91,7 @@ void ClientMainGame::mouseReleaseEvent(QMouseEvent * Stuff)
         {
             if(Planets[i].Player==PlayerID)
             {
-              Planets[i].PFocus= temp.intersects(Planets[i].Location);
+                Planets[i].PFocus= temp.intersects(Planets[i].Location);
             }
             else
             {
@@ -143,15 +146,40 @@ void ClientMainGame::Getmessage(QByteArray message)
         Planets.append(temp);
         break;
     case 3:
-        temp2=temp.PaquetToShip(*ss,Planets);
+        temp2.shipLaunched = false;
+        temp2.TickstoLauch = 10;
+        for(int i =0;i<Planets.length();i++)
+        {
+            if(ss->m_Data[0] == Planets[i].PlanetNumber)
+            {
+                temp2.StartLocation = QPoint(Planets[i].Location.x(),Planets[i].Location.y());
+                temp2.StartPlanet = Planets[i].PlanetNumber;
+                temp2.Attackvalue = Planets[i].Population / 2;
+                Planets[i].Population = Planets[i].Population / 2;
+                temp2.Location = QRect(Planets[i].Location.x()+Planets[i].Location.width()/2,Planets[i].Location.y()+Planets[i].Location.height()/2,20,20);
+                temp2.Player = ss->m_Player;
+            }
+            else
+            {
+                if(ss->m_Data[1] == Planets[i].PlanetNumber)
+                {
+                    temp2.Destination = QPoint(Planets[i].Location.x(),Planets[i].Location.y());
+                    temp2.EndPlanet = Planets[i].PlanetNumber;
+                }
+            }
+
+        }
+        temp2.shipspeed = 2;
+        temp2.LoadImage();
         Ships.append(temp2);
         break;
-     case 4:
+    case 4:
         PlayerID=ss->m_Player;
+        Timer->start();
         break;
     }
-    Timer->start();
 
+delete ss;
 }
 void ClientMainGame::OnTimerTick()
 {
@@ -208,11 +236,11 @@ void ClientMainGame::on_pushButton_4_clicked()
     int TotalPlanetsSoFar = Planets.length();
     for(int k=3;k<6;k++)
     {
-    for(int i = 0;i<random;i++)
-    {
-        temp.MirrorPlanet(Planets[i],k-1,TotalPlanetsSoFar);
-        Planets.append(temp);
-    }
+        for(int i = 0;i<random;i++)
+        {
+            temp.MirrorPlanet(Planets[i],k-1,TotalPlanetsSoFar);
+            Planets.append(temp);
+        }
     }
 
 }

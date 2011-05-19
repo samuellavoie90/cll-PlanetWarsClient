@@ -257,33 +257,3 @@ bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
 
  }
 
- Ship Planet::PaquetToShip(Paquet p, QList<Planet> Planets)
- {
-    Ship Someship;
-     Someship.shipLaunched = false;
-     Someship.TickstoLauch = 10;
-     for(int i =0;i<Planets.length();i++)
-     {
-         if(p.m_Player ==Planets[i].Player&&p.m_Data[0] == Planets[i].PlanetNumber)
-         {
-             Someship.StartLocation = QPoint(Planets[i].Location.x(),Planets[i].Location.y());
-             Someship.StartPlanet = Planets[i].PlanetNumber;
-             Someship.Attackvalue = Planets[i].Population / 2;
-             Planets[i].Population = Planets[i].Population / 2;
-             Someship.Location = QRect(Planets[i].Location.x()+Planets[i].Location.width()/2,Planets[i].Location.y()+Planets[i].Location.height()/2,20,20);
-             Someship.Player = Planets[i].Player;
-         }
-         else
-         {
-         if(p.m_Data[1] == Planets[i].PlanetNumber)
-         {
-              Someship.Destination = QPoint(Planets[i].Location.x(),Planets[i].Location.y());
-              Someship.EndPlanet = Planets[i].PlanetNumber;
-         }
-         }
-
-     }
-     Someship.shipspeed = 2;
-     Someship.LoadImage();
-     return Someship;
- }

@@ -17,12 +17,12 @@ void Ship::ShipTick(int TickCount)
 {
     if(shipLaunched)
     {
-        double PercentX;
-        double PercentY;
-        PercentX = (double)StartLocation.x()/(double)Destination.x();
-        PercentY = (double)StartLocation.y()/(double)Destination.y();
-        Location.moveRight(Location.x()+PercentX*shipspeed);
-        Location.moveBottom(Location.y()+PercentY*shipspeed);
+        double changeX;
+        double changeY;
+        changeX = StartLocation.x()-Destination.x();
+        changeY = StartLocation.y()-Destination.y();
+        Location.moveRight(Location.x()+changeX/changeY*shipspeed);
+        Location.moveBottom(Location.y()+changeY/changeX*shipspeed);
     }
     else
     {

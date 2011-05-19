@@ -55,7 +55,7 @@ void Paquet::FromByteArray(QByteArray unBA)
         m_Data[i] = 0;
         for(int k = 3; k >= 0; k--)
         {
-            m_Data[i] |= (unBA[j] << 8*k);
+            m_Data[i] |= ((int)(((uchar)unBA[j])) << 8*k);
             j++;
         }
     }

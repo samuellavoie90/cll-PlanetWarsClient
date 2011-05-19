@@ -20,19 +20,4 @@ QRect MagicRect::GetRectangle()
   {
       QP->drawRect(GetRectangle());
   }
-  void MagicRect::CheckPlanetsWithin(QList<Planet> Planets, int PlayerID)
-  {
-      QRect temp = GetRectangle();
-      for(int i =0;i<Planets.length();i++)
-      {
-          if(Planets[i].Player==PlayerID)
-          {
-            Planets[i].PFocus= temp.intersects(Planets[i].Location);
-          }
-          else
-          {
-              Planets[i].PFocus=false;
-          }
-      }
 
-  }

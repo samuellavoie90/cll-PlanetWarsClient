@@ -29,6 +29,7 @@ public:
     QTimer *Timer;
     QImage background;
     bool MousePressed;
+    int m_TotalPlayers;
     void mousePressEvent(QMouseEvent * Stuff);
     void mouseReleaseEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *);

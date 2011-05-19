@@ -14,6 +14,7 @@ ClientMainGame::ClientMainGame(QWidget *parent) :    QMainWindow(parent),    ui(
     connect(Timer,SIGNAL(timeout()),this,SLOT(OnTimerTick()));
     MousePressed = false;
     WindowRes = this->geometry();
+    PlayerID = 1;
 
 
 }
@@ -49,6 +50,7 @@ void ClientMainGame::mousePressEvent(QMouseEvent * Stuff)
     if(Stuff->button()==Qt::LeftButton)
     {
         MRE.TopLeft=QPoint(Stuff->pos());
+        MRE.BotRight=QPoint(Stuff->pos());
         MousePressed=true;
     }
 }
@@ -57,7 +59,18 @@ void ClientMainGame::mouseReleaseEvent(QMouseEvent * Stuff)
     if(Stuff->button()==Qt::LeftButton)
     {
         MousePressed = false;
-        MRE.CheckPlanetsWithin(Planets,PlayerID);
+        QRect temp = QRect(MRE.GetRectangle());
+        for(int i =0;i<Planets.length();i++)
+        {
+            if(Planets[i].Player==PlayerID)
+            {
+              Planets[i].PFocus= temp.intersects(Planets[i].Location);
+            }
+            else
+            {
+                Planets[i].PFocus=false;
+            }
+        }
     }
 
 }
@@ -94,6 +107,7 @@ void ClientMainGame::Getmessage(QByteArray message)
         break;
     case 2:        
         temp.initializeFromint(ss->m_Data);
+        m_TotalPlayers = ss->m_Player;
         Planets.append(temp);
         break;
     case 3:
@@ -119,19 +133,12 @@ void ClientMainGame::on_pushButton_3_clicked()
     Planet temp;
     ui->frame->setVisible(false);
     Timer->start();
-    for(int i =0;i<random;i++)
+    temp.initialize(1,1,Planets);
+    Planets.append(temp);
+    for(int i =1;i<random;i++)
     {
-        if(i==1)
-        {
-            temp.initialize(1,1,Planets);
-        }
-        else
-        {
-            temp.initialize(5,1,Planets);
-        }
+        temp.initialize(5,1,Planets);
         Planets.append(temp);
-
-
     }
     for(int i = 0;i<random;i++)
     {

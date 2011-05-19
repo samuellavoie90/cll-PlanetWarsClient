@@ -12,7 +12,6 @@ public:
     QRect Rectangle1;
     QRect GetRectangle();
     void Draw(QPainter *QP);
-    void CheckPlanetsWithin(QList<Planet> Planets, int PlayerID);
 
 };
 

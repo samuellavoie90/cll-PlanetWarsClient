@@ -115,13 +115,13 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     {
         Player=5;
     }
-    LoadImage();
-    Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
-    Player=SomePlanet.Player;
+
+    Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));   
     PopulationGrowth=SomePlanet.PopulationGrowth;
     Population =SomePlanet.Population;
     PlanetNumber = SomePlanet.PlanetNumber+PlanetCount;
     PFocus = false;
+    LoadImage();
 
 }
 bool Planet::CheckPlanetToPlanetCollision(Planet planet2)
@@ -182,15 +182,11 @@ if(PFocus)
 {
     QP->drawEllipse(QPoint(Location.x()+Location.width()/2,Location.y()+Location.height()/2),Location.width()+5,Location.height()+5);
 }
-
-
 QP->drawImage(Location,PlanetImg);
-
 tempColor.setRgb(255,255,255,255);
 temppen = QPen(tempColor);
 QP->setPen(temppen);
-QP->drawText(QPoint(Location.x()+Location.width()/2-7,Location.y()+Location.height()/2),QString::number(Population,10));
-
+QP->drawText(QPoint(Location.x()+Location.width()/2-7,Location.y()+Location.height()/2),QString::number(Population,10)); //Set back to population
 }
 
 bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
@@ -217,6 +213,7 @@ bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
      PopulationGrowth = W[1];
      Population = W[2];
      Location = QRect(QPoint(W[3],W[4]),QSize(W[5],W[6]));
+     PlanetNumber = W[7];
     LoadImage();
  }
  void Planet::LoadImage()

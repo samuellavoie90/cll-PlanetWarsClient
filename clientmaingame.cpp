@@ -117,14 +117,12 @@ void ClientMainGame::TickALL(int tick)
         Planets[i].PlanetTick(tick);
 
     }
-    for(int k =0;k<Ships.length();k++)
+    for(int k =Ships.length()-1;k>=0;k--)
     {
         if(Planets[0].CheckShipToPlanetCollision(Ships[k],&Planets[Ships[k].EndPlanet]))
         {
             Ships.removeAt(k);
-            break;
         }
-
 
     }
     for(int i =0;i<Ships.length();i++)
@@ -160,9 +158,9 @@ void ClientMainGame::Getmessage(QByteArray message)
                 temp = Planets[i];
                 temp2.StartLocation = QPoint(Planets[i].Location.x(),Planets[i].Location.y());
                 temp2.StartPlanet = Planets[i].PlanetNumber;
-                temp2.Attackvalue = Planets[i].Population / 2;
-                Planets[i].Population = Planets[i].Population / 2;
-                temp2.Location = QRect(Planets[i].Location.x()+Planets[i].Location.width()/2,Planets[i].Location.y()+Planets[i].Location.height()/2,20,20);
+                temp2.Attackvalue = Planets[i].Population / 2.0;
+                Planets[i].Population = qRound(Planets[i].Population / 2.0);
+                temp2.Location = QRect(Planets[i].Location.x()+Planets[i].Location.width()/4,Planets[i].Location.y()+Planets[i].Location.height()/4,20,20);
                 temp2.Player = ss->m_Player;
             }
             else
@@ -176,11 +174,11 @@ void ClientMainGame::Getmessage(QByteArray message)
             }
 
         }
-        temp2.XRatio= temp3.Location.x()-temp.Location.x();
-        temp2.YRatio = temp3.Location.y()-temp.Location.y();
-        temp2.XTravel = temp2.XRatio;
-        temp2.YTravel = temp2.YRatio;
-        temp2.shipspeed = 2;
+        temp2.XRatio= temp3.Location.x()+temp3.Location.width()/2.0-(temp.Location.x()+temp.Location.width()/2.0);
+        temp2.YRatio = temp3.Location.y()+temp3.Location.height()/2.0-(temp.Location.y()+temp.Location.height()/2.0);
+        temp2.XTravel = temp2.Location.x();
+        temp2.YTravel = temp2.Location.y();
+        temp2.shipspeed = 3;
         temp2.HDistance = qSqrt(qPow(temp2.XRatio, 2)+qPow(temp2.YRatio, 2));
         temp2.LoadImage();
         Ships.append(temp2);

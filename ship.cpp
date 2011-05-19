@@ -17,8 +17,8 @@ void Ship::ShipTick(int TickCount)
 {
     if(shipLaunched)
     {       
-        XTravel += (HDistance * XRatio/100*shipspeed);
-        YTravel += (HDistance * YRatio/100*shipspeed);
+        XTravel += (XRatio/HDistance*shipspeed);
+        YTravel += (YRatio/HDistance*shipspeed);
         Location.moveTo(QPoint(XTravel,YTravel));
     }
     else

@@ -24,6 +24,11 @@ public:
     int Player;
     void LoadImage();
     Paquet ShipToPacket();
+    double XRatio;
+    double YRatio;
+    double XTravel;
+    double YTravel;
+    double HDistance;
 
 //
     static bool CheckShipToShipCollision(Ship ship1, Ship ship2);

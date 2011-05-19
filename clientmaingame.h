@@ -8,6 +8,7 @@
 #include "magicrect.h"
 #include "thclient.h"
 #include "paquet.h"
+#include <qmath.h>
 namespace Ui {
     class ClientMainGame;
 }

@@ -16,13 +16,10 @@ Ship::Ship(QObject *parent)
 void Ship::ShipTick(int TickCount)
 {
     if(shipLaunched)
-    {
-        double changeX;
-        double changeY;
-        changeX = StartLocation.x()-Destination.x();
-        changeY = StartLocation.y()-Destination.y();
-        Location.moveRight(Location.x()+changeX/changeY*shipspeed);
-        Location.moveBottom(Location.y()+changeY/changeX*shipspeed);
+    {       
+        XTravel += (HDistance * XRatio/100*shipspeed);
+        YTravel += (HDistance * YRatio/100*shipspeed);
+        Location.moveTo(QPoint(XTravel,YTravel));
     }
     else
     {

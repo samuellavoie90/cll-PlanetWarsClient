@@ -118,7 +118,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     LoadImage();
     Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
     Player=SomePlanet.Player;
-    PopulationGrowth=PopulationGrowth;
+    PopulationGrowth=SomePlanet.PopulationGrowth;
     Population =SomePlanet.Population;
     PlanetNumber = SomePlanet.PlanetNumber+PlanetCount;
     PFocus = false;
@@ -173,10 +173,21 @@ return Someship;
 }
 void Planet::DrawPlanet(QPainter *QP)
 {
-QP->drawImage(Location,PlanetImg);
 QColor tempColor = QColor();
+tempColor.setRgb(0,255,0,255);
+QPen temppen;
+temppen = QPen(tempColor);
+QP->setPen(temppen);
+if(PFocus)
+{
+    QP->drawEllipse(QPoint(Location.x()+Location.width()/2,Location.y()+Location.height()/2),Location.width()+5,Location.height()+5);
+}
+
+
+QP->drawImage(Location,PlanetImg);
+
 tempColor.setRgb(255,255,255,255);
-QPen temppen = QPen(tempColor);
+temppen = QPen(tempColor);
 QP->setPen(temppen);
 QP->drawText(QPoint(Location.x()+Location.width()/2-7,Location.y()+Location.height()/2),QString::number(Population,10));
 

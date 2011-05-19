@@ -160,7 +160,6 @@ Someship.TickstoLauch = 10;
 Someship.StartLocation = QPoint(Location.x(),Location.y());
 Someship.Destination = QPoint(Destination.Location.x(),Destination.Location.y());
 Someship.Attackvalue = Population / 2;
-Population = Population /2;
 Someship.shipspeed = 2;
 Someship.Location = QRect(Location.x()+Location.width()/2,Location.y()+Location.height()/2,20,20);
 Someship.Player = Player;
@@ -190,15 +189,23 @@ QP->drawText(QPoint(Location.x()+Location.width()/2-7,Location.y()+Location.heig
 
 bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
 {
-    if(SomeShip.Location.intersects(SomePlanet->Location))
+    if(SomeShip.Location.intersects(SomePlanet->Location)&&SomeShip.StartPlanet!=SomePlanet->PlanetNumber)
     {
-        SomePlanet->PFocus = false;
-        SomePlanet->Population -= SomeShip.Attackvalue;
-        if(SomePlanet->Population<0)
+        if(SomeShip.Player=SomePlanet->Player)
         {
-            SomePlanet->Population = 0-SomePlanet->Population*2;
-            SomePlanet->Player = SomeShip.Player;
+            SomePlanet->Population += SomeShip.Attackvalue;
         }
+        else
+        {
+            SomePlanet->PFocus = false;
+            SomePlanet->Population -= SomeShip.Attackvalue;
+            if(SomePlanet->Population<0)
+            {
+                SomePlanet->Population = 0-SomePlanet->Population*2;
+                SomePlanet->Player = SomeShip.Player;
+            }
+        }
+
         return true;
     }
     else

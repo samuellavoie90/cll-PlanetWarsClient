@@ -27,30 +27,35 @@ QByteArray Paquet::ToByteArray()
     unBA[2]= temp;
     temp = (char)(m_Player >> 8);
     unBA[3]= temp;
+    int j = 4;
     for(int i = 0; i < 30; i++)
     {
-        temp = (char)(255 & m_Data[i]);
-        unBA.append(temp);
-        temp = (char)((65280 & m_Data[i]) >> 8);
-        unBA.append(temp);
+        temp = (char)(4278190080 & m_Data[i] >> 24);
+        unBA[j] = temp;
+        j++;
         temp = (char)((16711680 & m_Data[i]) >> 16);
-        unBA.append(temp);
-        temp = (char)(m_Data[i] >> 24);
-        unBA.append(temp);
+        unBA[j] = temp;
+        j++;
+        temp = (char)((65280 & m_Data[i]) >> 8);
+        unBA[j] = temp;
+        j++;
+        temp = (char)(255 & m_Data[i]);
+        unBA[j] = temp;
+        j++;
     }
     return unBA;
 }
 void Paquet::FromByteArray(QByteArray unBA)
 {
-    m_Message =(short)unBA[0] | (((short)unBA[1]) << 8);
-    m_Player = (short)unBA[2] | (((short)unBA[3]) << 8);
-    int j = 0;
+    m_Message = unBA[0] | (unBA[1] << 8);
+    m_Player = unBA[2] | (unBA[3] << 8);
+    int j = 4;
     for(int i = 0; i < 30; i++)
     {
         m_Data[i] = 0;
-        for(int k = 0; k < 4; k++)
+        for(int k = 3; k >= 0; k--)
         {
-            m_Data[i] |= (((short)unBA[j+4]) << (8*k));
+            m_Data[i] |= (unBA[j] << 8*k);
             j++;
         }
     }

@@ -48,6 +48,7 @@ signals:
      void repaint();
 
 
+
 private slots:
      void OnTimerTick();
      void on_pushButton_3_clicked();

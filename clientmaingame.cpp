@@ -53,6 +53,30 @@ void ClientMainGame::mousePressEvent(QMouseEvent * Stuff)
         MRE.BotRight=QPoint(Stuff->pos());
         MousePressed=true;
     }
+    if(Stuff->button() == Qt::RightButton)
+    {
+        QRect cursor = QRect(Stuff->pos(),QSize(1,1));
+        Ship temp;
+        int AttackedPlanetNumber = 0;
+        Paquet SomeShip;
+        for(int  i = 0;i<Planets.length();i++)
+        {
+            if(cursor.intersects(Planets[i].Location))
+            {
+                AttackedPlanetNumber = i;
+                break;
+            }
+        }
+        for(int i=0;i<Planets.length();i++)
+        {
+            if(Planets[i].PFocus  && AttackedPlanetNumber!=i)
+            {
+                temp =Planets[i].CreateShip(Planets[AttackedPlanetNumber]);
+                SomeShip = temp.ShipToPacket();
+                emit SendInfo(SomeShip.ToByteArray());
+            }
+        }
+    }
 }
 void ClientMainGame::mouseReleaseEvent(QMouseEvent * Stuff)
 {
@@ -72,6 +96,7 @@ void ClientMainGame::mouseReleaseEvent(QMouseEvent * Stuff)
             }
         }
     }
+
 
 }
 void ClientMainGame::mouseMoveEvent(QMouseEvent * Stuff)

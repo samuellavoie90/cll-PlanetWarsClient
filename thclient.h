@@ -15,7 +15,8 @@ public:
     bool ConnectToHost();
     QByteArray baReception;
 signals:
-    void NewTime(QByteArray);    
+    void NewTime(QByteArray);
+    void SendInfo(QByteArray);
 
 
 protected:

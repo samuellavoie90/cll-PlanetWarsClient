@@ -87,6 +87,13 @@ void ClientMainGame::TickALL(int tick)
     for(int i =0;i<Planets.length();i++)
     {
         Planets[i].PlanetTick(tick);
+        for(int k =0;k<Ships.length();k++)
+        {
+            if(Planets[i].CheckShipToPlanetCollision(Ships[k],&Planets[i]))
+            {
+                Ships.removeAt(k);
+            }
+        }
     }
     for(int i =0;i<Ships.length();i++)
     {
@@ -156,4 +163,31 @@ void ClientMainGame::on_pushButton_clicked()
     TC->ConnectToHost();
     Planets.clear();
     ui->frame->setVisible(false);
+}
+
+void ClientMainGame::on_pushButton_4_clicked()
+{
+    Planets.clear();
+    qsrand(QTime::currentTime().msec()*QTime::currentTime().second());
+    int random = 4+qrand()%2;
+    Planet temp;
+    ui->frame->setVisible(false);
+    Timer->start();
+    temp.initialize(1,2,Planets);
+    Planets.append(temp);
+    for(int i =1;i<random;i++)
+    {
+        temp.initialize(5,2,Planets);
+        Planets.append(temp);
+    }
+    int TotalPlanetsSoFar = Planets.length();
+    for(int k=3;k<6;k++)
+    {
+    for(int i = 0;i<random;i++)
+    {
+        temp.MirrorPlanet(Planets[i],k-1,TotalPlanetsSoFar);
+        Planets.append(temp);
+    }
+    }
+
 }

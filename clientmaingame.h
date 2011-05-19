@@ -52,6 +52,7 @@ private slots:
      void OnTimerTick();
      void on_pushButton_3_clicked();
      void on_pushButton_clicked();
+     void on_pushButton_4_clicked();
 };
 
 #endif // CLIENTMAINGAME_H

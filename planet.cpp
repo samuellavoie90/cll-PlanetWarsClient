@@ -31,14 +31,16 @@ do
 {
     if(Player!=1)
     {
+
         temp = QPoint(qrand()%sizex,qrand()%sizey);
-        PopulationGrowth = 15+qrand()%50;
+        PopulationGrowth = 20+qrand()%50;
     }
 
     else
     {
-        temp = QPoint(qrand()%(sizex-40),qrand()%(sizey-40));
-        PopulationGrowth = 20+qrand()%45;
+
+        temp = QPoint(qrand()%(sizex),qrand()%(sizey));
+        PopulationGrowth = 30+qrand()%30;
     }
     tempsize = PopulationGrowth;
     Location=QRect(temp,QSize(tempsize,tempsize));
@@ -76,7 +78,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
             {
                 Player=2;
             }
-            placex = 1024;
+            placex = 1100;
             placey = SomePlanet.Location.y()*2;
 
         }
@@ -88,7 +90,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
                 Player=3;
             }
             placex = SomePlanet.Location.x()*2;
-            placey = 768;
+            placey = 900;
 
 
         }
@@ -99,8 +101,8 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
             {                
                 Player=4;
             }
-            placex = 1024;
-            placey = 768;
+            placex = 1100;
+            placey = 900;
         }
     }
     else
@@ -113,7 +115,7 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     }
 
 
-    Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));   
+    Location = QRect(QPoint(placex-SomePlanet.Location.x(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));
     PopulationGrowth=SomePlanet.PopulationGrowth;
     Population =SomePlanet.Population;
     PlanetNumber = SomePlanet.PlanetNumber+PlanetCount;
@@ -191,6 +193,12 @@ bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
     if(SomeShip.Location.intersects(SomePlanet->Location))
     {
         SomePlanet->PFocus = false;
+        SomePlanet->Population -= SomeShip.Attackvalue;
+        if(SomePlanet->Population<0)
+        {
+            SomePlanet->Population = 0-SomePlanet->Population*2;
+            SomePlanet->Player = SomeShip.Player;
+        }
         return true;
     }
     else

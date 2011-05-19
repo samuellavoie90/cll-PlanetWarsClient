@@ -142,7 +142,7 @@ void ClientMainGame::on_pushButton_3_clicked()
     }
     for(int i = 0;i<random;i++)
     {
-        temp.MirrorPlanet(Planets[i],2,Planets.length());
+        temp.MirrorPlanet(Planets[i],1,Planets.length());
         temp.Location.moveRight(temp.Location.x()+120);
         Planets.append(temp);
     }

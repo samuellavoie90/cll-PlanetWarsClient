@@ -67,17 +67,18 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
     TickTillLastPop=100;
     int placex = 1024;
     int placey = 768;
+    Player = 5;
     if(Quadrant!=1)
     {
         if(Quadrant==2)
-        {
+        {            
             if(SomePlanet.Player==1)
             {
                 Player=2;
             }
             placex = 1024;
             placey = SomePlanet.Location.y()*2;
-             Player=2;
+
         }
         else
         if(Quadrant==3)
@@ -111,10 +112,6 @@ void Planet::MirrorPlanet(Planet SomePlanet,int Quadrant, int PlanetCount)
         }
     }
 
-    if(SomePlanet.Player == 5)
-    {
-        Player=5;
-    }
 
     Location = QRect(QPoint(placex-SomePlanet.Location.x()-SomePlanet.Location.width(),placey-SomePlanet.Location.y()),QSize(SomePlanet.Location.size()));   
     PopulationGrowth=SomePlanet.PopulationGrowth;
@@ -180,7 +177,7 @@ temppen = QPen(tempColor);
 QP->setPen(temppen);
 if(PFocus)
 {
-    QP->drawEllipse(QPoint(Location.x()+Location.width()/2,Location.y()+Location.height()/2),Location.width()+5,Location.height()+5);
+    QP->drawEllipse(QPoint(Location.x()+Location.width()/2,Location.y()+Location.height()/2),Location.width()-5,Location.height()-5);
 }
 QP->drawImage(Location,PlanetImg);
 tempColor.setRgb(255,255,255,255);
@@ -237,7 +234,7 @@ bool Planet::CheckShipToPlanetCollision(Ship SomeShip, Planet *SomePlanet)
      {
      PlanetImg.load("PY.png",0);
      }
-     else
+
          if(Player ==5)
          {
              PlanetImg.load("PG.png",0);

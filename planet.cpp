@@ -148,10 +148,10 @@ void Planet::PlanetTick(int tickAmmount)
     if(Player!=5)
     {
         TickTillLastPop-=tickAmmount;
-        if(TickTillLastPop <= PopulationGrowth)
+        if(TickTillLastPop <= PopulationGrowth/1.5)
         {
             Population += 1;
-            TickTillLastPop = 90;
+            TickTillLastPop = 75; //changer cette valeur pour augmenter la vitesse de production. (plus petit = plus vite)
         }
     }
 }
@@ -179,7 +179,7 @@ void Planet::PlanetTick(int tickAmmount)
         QP->setPen(temppen);
         if(PFocus)
         {
-            QP->drawEllipse(QPoint(Location.x()+Location.width()/2,Location.y()+Location.height()/2),Location.width()-5,Location.height()-5);
+            QP->drawEllipse(QPoint(Location.x()+Location.width()/2,Location.y()+Location.height()/2),Location.width()-7,Location.height()-7);
         }
         QP->drawImage(Location,PlanetImg);
         tempColor.setRgb(255,255,255,255);
@@ -199,13 +199,17 @@ void Planet::PlanetTick(int tickAmmount)
             }
             else
             {
-                SomePlanet->PFocus = false;
-                SomePlanet->Population -= SomeShip.Attackvalue;
-                if(SomePlanet->Population<=0)
+
+                if(SomeShip.Attackvalue>SomePlanet->Population)
                 {
-                    SomePlanet->Population = 0-SomePlanet->Population*2;
-                    SomePlanet->Player = SomeShip.Player;
-                    SomePlanet->LoadImage();
+                     SomePlanet->PFocus = false;
+                     SomePlanet->Player = SomeShip.Player;
+                     SomePlanet->LoadImage();
+                     SomePlanet->Population = SomeShip.Attackvalue-SomePlanet->Population;
+                }
+                else
+                {
+                 SomePlanet->Population -= SomeShip.Attackvalue;
                 }
             }
 

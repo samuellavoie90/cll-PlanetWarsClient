@@ -29,12 +29,6 @@ public:
     double XTravel;
     double YTravel;
     double HDistance;
-
-//
-    static bool CheckShipToShipCollision(Ship ship1, Ship ship2);
-//une variable de texture
-signals:
-
 public slots:
 
 

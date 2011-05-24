@@ -24,6 +24,7 @@ ClientMainGame::~ClientMainGame()
     delete TC->m_sockClient;
     delete TC;
     delete Timer;
+    delete myQP;
     delete ui;
 }
 void ClientMainGame::paintEvent(QPaintEvent *e)
@@ -60,7 +61,7 @@ void ClientMainGame::mousePressEvent(QMouseEvent * Stuff)
     {
         QRect cursor = QRect(Stuff->pos(),QSize(1,1));
         Ship temp;
-        int AttackedPlanetNumber = 0;
+        int AttackedPlanetNumber = 999;
         Paquet temp2;
         for(int  i = 0;i<Planets.length();i++)
         {
@@ -72,7 +73,7 @@ void ClientMainGame::mousePressEvent(QMouseEvent * Stuff)
         }
         for(int i=0;i<Planets.length();i++)
         {
-            if(Planets[i].PFocus  && AttackedPlanetNumber!=i)
+            if(Planets[i].PFocus  && AttackedPlanetNumber!=i && Planets[i].Population >1 && AttackedPlanetNumber!=999)
             {
                 temp =Planets[i].CreateShip(Planets[AttackedPlanetNumber]);
                 temp2 = temp.ShipToPacket();
@@ -112,24 +113,71 @@ void ClientMainGame::mouseMoveEvent(QMouseEvent * Stuff)
 
 void ClientMainGame::TickALL(int tick)
 {
+    ShipsToRemove.clear();
     for(int i =0;i<Planets.length();i++)
     {
         Planets[i].PlanetTick(tick);
 
     }
+
     for(int k =Ships.length()-1;k>=0;k--)
     {
+
         if(Planets[0].CheckShipToPlanetCollision(Ships[k],&Planets[Ships[k].EndPlanet]))
         {
-            Ships.removeAt(k);
+            ShipsToRemove.append(k);
+            //Ships.removeAt(k);
+        }
+        else
+        {
+
+            Ships[k].ShipTick(tick);//re evaluates ships position based on how much time passed(tick).  tick was always set at 1, but it was made this way to be tweakable
+            for(int j=Ships.length()-1;j>=0;j--)
+            {
+                if(k!=j)
+                {
+                    if(Ships[k].Location.intersects(Ships[j].Location))
+                    {
+                        if(Ships[j].Player!=Ships[k].Player)
+                        {
+                            if(Ships[j].Attackvalue == Ships[k].Attackvalue)
+                            {
+                                ShipsToRemove.append(j);
+                                ShipsToRemove.append(k);
+                            }
+                            else
+                            {
+                                if(Ships[j].Attackvalue>Ships[k].Attackvalue)//because it will loop around all ships, they will at some point both be in j, then in k, so i only have to check this case
+                                {
+                                    Ships[j].Attackvalue-=Ships[k].Attackvalue;
+                                    Ships[k].Attackvalue=0;
+                                    ShipsToRemove.append(k);
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            if(Ships[j].EndPlanet ==Ships[k].EndPlanet)
+                            {
+                                Ships[k].EndPlanet=999;
+                                Ships[j].Attackvalue +=Ships[k].Attackvalue;
+                                ShipsToRemove.append(k);
+                            }
+
+                        }
+                    }
+                }
+            }
         }
 
     }
-    for(int i =0;i<Ships.length();i++)
+    for(int k =0;k<ShipsToRemove.length();k++)
     {
-        Ships[i].ShipTick(tick);
+        Ships.removeAt(ShipsToRemove[k]);//To prevent out of bound errors in previous loops
     }
 }
+
 
 void ClientMainGame::Getmessage(QByteArray message)
 {
@@ -189,7 +237,7 @@ void ClientMainGame::Getmessage(QByteArray message)
         break;
     }
 
-delete ss;
+    delete ss;
 }
 void ClientMainGame::OnTimerTick()
 {
@@ -243,12 +291,11 @@ void ClientMainGame::on_pushButton_4_clicked()
         temp.initialize(5,2,Planets);
         Planets.append(temp);
     }
-    int TotalPlanetsSoFar = Planets.length();
     for(int k=3;k<6;k++)
     {
         for(int i = 0;i<random;i++)
         {
-            temp.MirrorPlanet(Planets[i],k-1,TotalPlanetsSoFar);
+            temp.MirrorPlanet(Planets[i],k-1,Planets.length());
             Planets.append(temp);
         }
     }

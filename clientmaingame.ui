@@ -17,10 +17,10 @@
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>150</y>
-      <width>441</width>
-      <height>311</height>
+      <x>110</x>
+      <y>140</y>
+      <width>831</width>
+      <height>251</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -37,6 +37,43 @@
        <width>62</width>
        <height>17</height>
       </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>120</red>
+           <green>120</green>
+           <blue>120</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
      </property>
      <property name="text">
       <string>IPServeur</string>
@@ -65,35 +102,85 @@
       </rect>
      </property>
      <property name="text">
-      <string>10.1.1.121</string>
+      <string>127.0.0.1</string>
      </property>
     </widget>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>10</y>
-      <width>251</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Generate Random Test Map 1v1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>410</x>
-      <y>50</y>
-      <width>251</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Generate Random Test Map 1v1v1v1</string>
-    </property>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>200</y>
+       <width>251</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate Random Test Map 1v1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>200</y>
+       <width>251</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate Random Test Map 1v1v1v1</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>771</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>255</red>
+           <green>255</green>
+           <blue>255</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="WindowText">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>120</red>
+           <green>120</green>
+           <blue>120</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="text">
+      <string>C'est bouton ne font que tester le generateur de map et ne peuve pas etre utiliser pour tester d'autre aspect du jeu.</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -102,7 +189,7 @@
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

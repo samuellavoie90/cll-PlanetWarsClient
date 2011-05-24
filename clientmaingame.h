@@ -22,6 +22,7 @@ public:
     ~ClientMainGame();
     QList<Planet> Planets;
     QList<Ship> Ships;
+    QList<int> ShipsToRemove; //Variable membre pour empecher de la cree 30 fois par seconde, pour plus de performance.
     MagicRect MRE;
     thClient *TC;
     QRect WindowRes;
